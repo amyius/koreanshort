@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=5,width=device-width,viewport-fit=cover">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description"
+        content="「今日速报」全网热播短剧 0 点秒更！4K 纯净画质、零广告直链，手机/电脑端秒开；剧情反转、爆款预告、幕后花絮一站打包。通勤 3 分钟也能追完一集，爽点不断电。立即收藏，短剧免费观看，明早还有新番空降！">
+    <meta name="keywords"
+        content="短剧头条,短剧免费观看，免费短剧资讯, 高清在线观看, 每日爆款更新, 甜宠/逆袭/悬疑多类型, 零广告追剧, 最新短剧资讯, duanju, findshortdrama">
+    <meta name="yandex-verification" content="3b668dc11a659934" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta property="og:type" content="webpage">
+    <meta property="og:title" content="大陆短剧 | findshortdrama">
+    <meta property="og:description"
+        content="「今日速报」全网热播短剧 0 点秒更！4K 纯净画质、零广告直链，手机/电脑端秒开；剧情反转、爆款预告、幕后花絮一站打包。通勤 3 分钟也能追完一集，爽点不断电。立即收藏，明早还有新番空降！">
+    <meta property="og:image" content="https://www.findshortdrama.com/favicons.ico">
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "短剧资讯 | findshortdrama",
+            "description": "「今日速报」全网热播短剧 0 点秒更！4K 纯净画质、零广告直链",
+            "url": "https://www.findshortdrama.com/info",
+            "publisher": {
+                "@type": "Organization",
+                "name": "findshortdrama",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.findshortdrama.com/favicons.ico"
+                }
+            }
+        }
+    </script>
+
+    <link rel="icon" href="/favicons.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicons.ico">
+    <link rel="canonical" href="https://www.findshortdrama.com/info">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>短剧资讯 | findshortdrama</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLPZN3RW8G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-ZLPZN3RW8G');
+    </script>
+    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary-color: #F5B98A;
+            --primary-light: #fce7d6;
+            --secondary-color: #1890ff;
+            --dark-color: #1f1f1f;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 12px;
+            --box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+            line-height: 1.6;
+        }
+
+        /* 主体内容美化 */
+        .body-content {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: calc(100vh - 270px);
+        }
+
+        .body-content h1 {
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .body-content h1::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), #ff7875);
+            border-radius: 2px;
+        }
+
+        /* 文章卡片美化 */
+        .article-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .article-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .article-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .article-card:hover .article-image {
+            transform: scale(1.03);
+        }
+
+        .article-header {
+            padding: 20px;
+            padding-bottom: 15px;
+        }
+
+        .article-title {
+            font-size: 1.4rem;
+            margin: 0 0 10px;
+            color: var(--dark-color);
+            line-height: 1.4;
+            transition: var(--transition);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-card:hover .article-title {
+            color: var(--secondary-color);
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .article-tag {
+            background-color: var(--primary-light);
+            color: #d46b08;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .article-tag:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .article-content {
+            padding: 0 20px 15px;
+            flex-grow: 1;
+        }
+
+        .article-excerpt {
+            margin: 0;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f9f9f9;
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            border-top: 1px solid #eee;
+        }
+
+        .read-more {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: #0d6efd;
+            transform: translateX(3px);
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .read-more:hover i {
+            transform: translateX(3px);
+        }
+
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .pagination a,
+        .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            padding: 0 15px;
+            border-radius: var(--border-radius);
+            background-color: white;
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .pagination a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .pagination .active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            font-weight: 600;
+        }
+
+        .pagination .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 99;
+            transition: var(--transition);
+            opacity: 0.9;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px) scale(1.05);
+            opacity: 1;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 992px) {
+            .article-list {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .body-content {
+                padding: 60px 20px;
+            }
+
+            .body-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .article-list {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .search-bar input[type="text"] {
+                width: 180px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .article-title {
+                font-size: 1.2rem;
+            }
+
+            .pagination a,
+            .pagination span {
+                min-width: 16px;
+                height: 36px;
+                margin: 0 3px;
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {include file="common/header" /}
+
+    <div class="body-content">
+        <h1>最新影视资讯</h1>
+
+        <div class="article-list">
+            {foreach $info.shortinfos as $item}
+            <article class="article-card articleinfo" attr-id="{$item.id}" attr-title="{$item.title}">
+                <img src="{$item.thumb}" alt="{$item.title}" class="article-image" loading="lazy">
+                <div class="article-header">
+                    <h2 class="article-title">{$item.title}</h2>
+                    <div class="article-meta">
+                        {volist name=":json_decode($item['keywords'], true)" id="tag"}
+                        <span class="article-tag">{$tag}</span>
+                        {/volist}
+                    </div>
+                </div>
+                <div class="article-content">
+                    <p class="article-excerpt">
+                        {:$item.content}
+                    </p>
+                </div>
+                <div class="article-footer">
+                    <span>{$item.publishTime} · {$item.viewCount}次阅读</span>
+                    <a href="/article/{$item.id}" class="read-more">阅读全文</a>
+                </div>
+            </article>
+            {/foreach}
+        </div>
+
+        {if $info.pagination}
+        <div class="pagination">
+            {if $info.pagination.current_page > 1}
+            <a href="?page={$info.pagination.current_page-1}">&lt;&lt;</a>
+            {else}
+            <span class="disabled">&lt;&lt;</span>
+            {/if}
+
+            {foreach $info.pagination.window as $p}
+            {if $p == $info.pagination.current_page}
+            <span class="active">{$p}</span>
+            {else}
+            <a href="?page={$p}">{$p}</a>
+            {/if}
+            {/foreach}
+
+            {if $info.pagination.current_page < $info.pagination.last_page} <a
+                href="?page={$info.pagination.current_page+1}">&gt;&gt;</a>
+                {else}
+                <span class="disabled">&gt;&gt;</span>
+                {/if}
+        </div>
+        {/if}
+    </div>
+
+    {include file="common/footer" /}
+
+    <button class="back-to-top" title="回到顶部"><i class="bi bi-arrow-up"></i></button>
+    {include file="common/qrcode" /}
+    <script>
+        $(document).ready(function () {
+            // 返回顶部按钮
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn();
+                } else {
+                    $('.back-to-top').fadeOut();
+                }
+            });
+
+            $('.back-to-top').click(function (e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: 0 }, 'smooth');
+            });
+
+            // 搜索功能
+            $('.search-icon').on('click', performSearch);
+            $('.search-bar input').on('keyup', function (e) {
+                if (e.key === 'Enter') performSearch();
+            });
+
+            function performSearch() {
+                const query = $('.search-bar input').val().trim();
+                if (query) {
+                    // window.location.href = '/search/' + encodeURIComponent(query);
+                    var url = '/search/' + encodeURIComponent(query);
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }
+            }
+
+            $('.article-card').on('click', function () {
+                var id = $(this).attr('attr-id');
+                var title = $(this).attr('attr-title');
+                // window.location.href = '/article/' + id + '/' + title;
+                var url = '/article/' + id + '/' + title;
+                window.open(url, '_blank', 'noopener,noreferrer');
+
+            })
+        });
+    </script>
+</body>
+
+</html>

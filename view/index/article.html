@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="initial-scale=1,maximum-scale=5,width=device-width,viewport-fit=cover">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="{$article.articledetail.subtitle}">
+    <meta name="keywords" content="短剧头条,短剧免费观看，免费短剧资讯, 高清在线观看, 每日爆款更新,  最新短剧资讯, duanju, findshortdrama">
+    <meta name="yandex-verification" content="3b668dc11a659934" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta property="og:type" content="webpage">
+    <meta property="og:title" content="大陆短剧 | findshortdrama | {$article.articledetail.title}">
+    <meta property="og:description" content="{$article.articledetail.subtitle}">
+    <meta property="og:image" content="{$article.articledetail.thumb}">
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "findshortdrama",
+            "name": "{$article.articledetail.title}",
+            "url": "https://www.findshortdrama.com/article/{$article.articledetail.id}/{$article.articledetail.title}",
+            "image": "{$article.articledetail.thumb}",
+            "description": "{$article.articledetail.keywords}",
+            "genre": "{$article.articledetail.tags}",
+            "datePublished": "{$article.articledetail.publishTime}",
+            "publisher": {
+                "@type": "Organization",
+                "name": "findshortdrama",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.findshortdrama.com/favicons.ico"
+                }
+            }
+        }
+    </script>
+    <link rel="icon" href="/favicons.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicons.ico">
+    <link rel="canonical"
+        href="https://www.findshortdrama.com/article/{$article.articledetail.id}/{$article.articledetail.title}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>{$article.articledetail.title}- 影视资讯</title>
+    <!-- Goodagle tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLPZN3RW8G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZLPZN3RW8G');
+    </script>
+    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8035633976285474"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+            height: auto;
+            line-height: 1.6;
+        }
+
+        :root {
+            --primary-color: #F5B98A;
+            --secondary-color: #1890ff;
+            --dark-color: #1f1f1f;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* 文章详情页样式 */
+        .article-detail-container {
+            max-width: 1200px;
+            margin: 75px auto;
+            padding: 0 20px;
+        }
+
+        .article-header {
+            margin-bottom: 30px;
+        }
+
+        .article-title {
+            font-size: 2rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .article-tag {
+            background-color: #f0f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        .article-stats {
+            display: flex;
+            align-items: center;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .article-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+
+        .article-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 25px;
+        }
+
+        .article-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .article-text p {
+            margin-bottom: 20px;
+        }
+
+        .article-highlight {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #d46b08;
+            margin: 30px 0;
+            padding-left: 15px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* 侧边栏样式 */
+        .article-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .sidebar-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin: 0 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ff7875;
+            position: relative;
+        }
+
+        .sidebar-title::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, #ff7875, #ff9c6e);
+        }
+
+        .news-flash {
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            color: #444;
+            position: relative;
+            padding-left: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .news-flash:last-child {
+            border-bottom: none;
+        }
+
+        .news-flash::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 6px;
+            height: 6px;
+            background-color: #ff7875;
+            border-radius: 50%;
+        }
+
+        .news-flash:hover {
+            background-color: #fafafa;
+            padding-left: 18px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .news-flash:hover::before {
+            background-color: #ff4d4f;
+            transform: scale(1.3);
+        }
+
+        .news-flash-date {
+            display: block;
+            font-size: 0.8rem;
+            color: #999;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* 添加动画效果 */
+        @keyframes flash {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        .sidebar-title::before {
+            content: "NEW";
+            position: absolute;
+            right: 0;
+            top: -5px;
+            background-color: #ff4d4f;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            animation: flash 1.5s infinite;
+        }
+
+        .trending-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .trending-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-item:hover {
+            background-color: #fafafa;
+            transform: translateX(5px);
+        }
+
+        .trending-rank {
+            width: 24px;
+            height: 24px;
+            background-color: #ff7875;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .trending-item:nth-child(1) .trending-rank {
+            background: linear-gradient(135deg, #ff7875, #ff4d4f);
+        }
+
+        .trending-item:nth-child(2) .trending-rank {
+            background: linear-gradient(135deg, #ff9c6e, #ff7875);
+        }
+
+        .trending-item:nth-child(3) .trending-rank {
+            background: linear-gradient(135deg, #ffbb96, #ff9c6e);
+        }
+
+        .trending-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+            margin-right: 12px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .trending-item:hover .trending-thumb {
+            transform: scale(1.1);
+        }
+
+        .trending-content {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .trending-title {
+            font-size: 0.95rem;
+            color: #333;
+            font-weight: 500;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .trending-item:hover .trending-title {
+            color: #ff7875;
+        }
+
+        .trending-count {
+            font-size: 0.8rem;
+            color: #999;
+            display: flex;
+            align-items: center;
+            margin-top: 3px;
+        }
+
+        .trending-count::before {
+            content: "👁️";
+            margin-right: 4px;
+            font-size: 0.9em;
+        }
+
+        .news-flash {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .news-flash-date {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gray-color);
+            margin-top: 5px;
+        }
+
+        /* 布局 */
+        .article-layout {
+            display: flex;
+            gap: 30px;
+        }
+
+        .article-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .article-sidebar {
+            width: 300px;
+        }
+
+        @media (max-width: 992px) {
+            .article-layout {
+                flex-direction: column;
+            }
+
+            .article-sidebar {
+                width: 100%;
+            }
+
+            .article-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .article-content {
+                padding: 20px;
+            }
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), #ff7875);
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-color);
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), #ff7875);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+    {include file="common/header" /}
+    <div class="article-detail-container">
+        <div class="article-layout">
+            <main class="article-main">
+                <div class="article-header">
+                    <h1 class="article-title">{$article.articledetail.title}</h1>
+                    <div class="article-meta">
+                        {volist name=":json_decode($article.articledetail['tags'], true)" id="tag"}
+                        <span class="article-tag">{$tag}</span>
+                        {/volist}
+                    </div>
+                    <div class="article-stats">
+                        <span>{$article.articledetail.publishTime} · {$article.articledetail.viewCount}次阅读</span>
+                    </div>
+                </div>
+
+                <div class="article-content">
+                    <img src="{$article.articledetail.thumb}" alt="{$article.articledetail.title}"
+                        class="article-image">
+
+                    <div class="article-text">
+                        <p class="article-highlight">
+                            {$article.articledetail.subtitle}
+                        </p>
+
+                        <p>
+                            {:$article.articledetail.content}
+                        </p>
+
+                    </div>
+                </div>
+            </main>
+
+            <aside class="article-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">站内排行榜</h3>
+                    <ul class="trending-list">
+                        {foreach $article.koreaninfo as $key => $item}
+                        <li class="trending-item" attr-id="{$item.id}" attr-title="{$item.name}">
+                            <span class="trending-rank">{$key + 1}</span>
+                            <img src="{$item.cover}" alt="{$item.name}" class="trending-thumb">
+                            <div class="trending-content">
+                                <span class="trending-title">{$item.name}</span>
+                                <span class="trending-count">{$item.conerMemo|default='0'}</span>
+                            </div>
+                        </li>
+                        {/foreach}
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">韩嫣快讯</h3>
+                    {foreach $article.shortinfo as $item}
+                    <div class="news-flash hykx" attr-id="{$item.id}" attr-title="{$item.title}">
+                        {$item.title}
+                        <span class="news-flash-date">{$item.publishTime}</span>
+                    </div>
+                    {/foreach}
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    {include file="common/footer" /}
+
+    <button class="back-to-top" title="回到顶部">↑</button>
+    {include file="common/qrcode" /}
+    <script>
+        $(document).ready(function () {
+            $('.mobile-nav-toggle').on('click', function (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                $('#navbar').toggleClass('navbar-mobile');
+
+                $(this).toggleClass('bi-list bi-x');
+                $('#navbar').hide().show(0);
+            });
+
+            // 返回顶部按钮
+            window.onscroll = function () {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    document.querySelector(".back-to-top").style.display = "flex";
+                } else {
+                    document.querySelector(".back-to-top").style.display = "none";
+                }
+            }
+
+            document.querySelector(".back-to-top").addEventListener("click", function () {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            });
+
+            $('.trending-item').on('click', function () {
+                var id = $(this).attr('attr-id');
+                var title = $(this).attr('attr-title');
+                var url = '/particulars/' + id + '/' + title;
+                // window.location.href = '/particulars/' + id + '/' + title;
+                window.open(url, '_blank', 'noopener,noreferrer');
+            })
+            $('.hykx').on('click', function () {
+                var id = $(this).attr('attr-id');
+                var title = $(this).attr('attr-title');
+                var url = '/article/' + id + '/' + title;
+                // window.location.href = '/article/' + id + '/' + title;
+                window.open(url, '_blank', 'noopener,noreferrer');
+            })
+
+        });
+    </script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</body>
+
+</html>

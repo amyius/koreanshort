@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=5,width=device-width,viewport-fit=cover">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description"
+        content="每日更新全网热门短剧资源大全，免费提供高清短剧在线观看。精选内容包含：甜宠短剧（高糖）、霸道总裁短剧（强推）、重生复仇短剧（逆袭）、穿越古装短剧（经典）、虐恋催泪短剧（必看）、悬疑推理短剧（烧脑）、都市职场短剧（现实）、校园青春短剧（怀旧）、婆媳家庭短剧（伦理）、玄幻仙侠短剧（特效）等，随时随地畅享精彩短视频内容。支持手机与电脑查看，无广告纯净播放,随时随地看热门短剧。">
+    <meta name="keywords"
+        content="最新短剧,大陆短剧,短剧推荐,热门短剧,热播短剧，每日更新全网热门短剧资源大全，短剧在线观看,短视频剧集,免费短剧,短剧大全,duanju,findshortdrama">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta property="og:type" content="webpage">
+    <meta property="og:title" content="大陆短剧 | findshortdrama">
+    <meta property="og:description"
+        content="每日更新全网热门短剧资源大全，免费提供高清短剧在线观看。精选内容包含：甜宠短剧（高糖）、霸道总裁短剧（强推）、重生复仇短剧（逆袭）、穿越古装短剧（经典）、虐恋催泪短剧（必看）、悬疑推理短剧（烧脑）、都市职场短剧（现实）、校园青春短剧（怀旧）、婆媳家庭短剧（伦理）、玄幻仙侠短剧（特效）等，随时随地畅享精彩短视频内容。支持手机与电脑查看，无广告纯净播放,随时随地看热门短剧。">
+    <meta property="og:image" content="https://www.findshortdrama.com/favicons.ico">
+    <script src="/js/jquery-3.6.0.min.js"></script>
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "短剧资源搜索 | findshortdrama",
+            "description": "每日更新全网热门短剧资源大全，免费提供高清短剧在线观看",
+            "url": "https://www.findshortdrama.com",
+            "publisher": {
+                "@type": "Organization",
+                "name": "findshortdrama",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.findshortdrama.com/favicons.ico"
+                }
+            }
+        }
+    </script>
+    <meta name="yandex-verification" content="3b668dc11a659934" />
+    <title>短剧资源搜索 | findshortdrama</title>
+    <link rel="icon" href="/favicons.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicons.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLPZN3RW8G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZLPZN3RW8G');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8035633976285474"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            max-width: 1100px !important;
+            margin: 20px auto !important;
+            padding: 0 20px !important;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #searchBtn {
+            padding: 12px 24px;
+            background: #6a5acd;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #searchBtn:hover {
+            background: #6a5acd;
+        }
+
+        #clearBtn {
+            padding: 12px 24px;
+            background: #4050c3;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        #clearBtn:hover {
+            background: #4050c3;
+        }
+
+        .result-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .no-result {
+            width: 100%;
+            color: #dc3545;
+            text-align: center;
+            font-size: 18px;
+            padding: 40px 0;
+            border: 2px dashed #e0e0e0;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .detail-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #6a5acd;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .detail-link:hover {
+            text-decoration: underline;
+        }
+
+        #resultContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .result-card {
+            flex: 1 1 27%;
+            /* 桌面端一行5个 */
+            max-width: 27%;
+            min-width: 250px;
+            /* 最小宽度 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            background-color: #fff;
+            transition: transform 0.3s ease;
+        }
+
+        .result-card img {
+            width: 90%;
+            height: 250px;
+            border-radius: 5px;
+        }
+
+        .result-card h3 {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .result-card p {
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .result-card .detail-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #6a5acd;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        .result-card .detail-link:hover {
+            background-color: #6a5acd;
+        }
+
+        .iscontent {
+            display: none;
+            text-align: center;
+            font-size: 18px;
+            color: #6a5acd;
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+        }
+
+        .loading {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #gohome {
+            background-color: #936bdf;
+            /* 蓝色背景 */
+            color: white;
+            /* 白色文字 */
+            border: none;
+            /* 无边框 */
+            padding: 10px 20px;
+            /* 内边距 */
+            font-size: 16px;
+            /* 字体大小 */
+            cursor: pointer;
+            /* 鼠标悬停时显示手型 */
+            border-radius: 5px;
+            /* 圆角边框 */
+            transition: background-color 0.3s ease;
+            /* 平滑过渡效果 */
+            margin: 10px;
+            /* 外边距 */
+        }
+
+        #gohome:hover {
+            background-color: rgb(211, 147, 248);
+            /* 鼠标悬停时的背景颜色 */
+        }
+
+        #gohome:active {
+            background-color: #a67bf5;
+            /* 按钮按下时的背景颜色 */
+        }
+
+        @media (max-width: 768px) {
+            .search-box {
+                flex-direction: column !important;
+                align-items: center;
+            }
+
+            #searchInput {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            #searchBtn,
+            #clearBtn,
+            #gohome {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .result-card {
+                flex: 1 1 100%;
+                max-width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .result-card img {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="请输入剧集名称">
+        <button id="searchBtn">搜索</button>
+        <button id="clearBtn">清空</button>
+        <button id="gohome">返回首页</button>
+    </div>
+    <div class="iscontent">请点击搜索按钮去搜索</div>
+    <div id="resultContainer"></div>
+    <div class="loadings"></div>
+    <div>
+        {include file="common/qrcode" /}
+    </div>
+
+
+    
+    <script>
+        $(document).ready(function () {
+            $('#gohome').click(function () {
+                window.location.href = '/';
+            });
+            checkContent();
+            var url = window.location.href;
+            var path = new URL(url).pathname;
+            var parts = path.split('/search/')[1]?.split('/') || [];
+            var searchValue = parts[0] ? decodeURIComponent(parts[0]) : '';
+            var category = parts[1] || '';
+            // console.log("searchValue",searchValue);console.log("category",category);return;
+            if (searchValue) {
+                $("#searchInput").val(decodeURIComponent(searchValue));
+            }
+            function performSearch() {
+                const query = $('#searchInput').val().trim();
+                const resultContainer = $('#resultContainer');
+                resultContainer.empty();
+
+                $('.iscontent').hide();
+                $('.loadings').append(`
+                    <div class="loading">
+                        <img src="/static/img/loading.gif" alt="加载中..." width="300" height="300">
+                    </div>
+                `);
+
+                console.log("加载状态已显示");
+
+                if (!query) {
+                    $('.loading').remove();
+                    $('.iscontent').show();
+                    resultContainer.append(`
+                        <div class="no-result">
+                            搜索内容不能为空！
+                        </div>
+                    `);
+                    console.log("搜索内容为空，加载状态已移除");
+                    return;
+                }
+
+                $.ajax({
+                    url: `/search/${encodeURIComponent(query)}/${encodeURIComponent(category)}`,
+                    method: 'GET',
+                    success: function (response) {
+                        console.log("请求成功，响应数据：", response);
+                        $('.loading').remove();
+
+                        if (Array.isArray(response) && response.length > 0) {
+                            resultContainer.empty();
+                            $('.iscontent').hide();
+                            response.forEach(function (item) {
+                                resultContainer.append(`
+                            <div class="result-card" attr-id="${item.id}" attr-name="${item.title}" attr-drama="${item.drama}">
+                                <img src="${item.cover}" alt="${item.name}" title="${item.name}" width="300" height="350" loading="lazy"
+                                onerror="this.onerror=null; this.src='${item.img}'" />
+                                <h3>${item.name}</h3>
+                                <p>剧集数：${item.episodes}</p>
+                                <a href="${item.link}" class="detail-link" target="_blank">了解详情</a>
+                            </div>
+                        `);
+                            });
+                        } else {
+                            $('.loading').remove();
+                            resultContainer.empty();
+                            resultContainer.append(`
+                        <div class="no-result">
+                            暂未找到相关资源
+                        </div>
+                    `);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("请求失败，错误信息：", error);
+                        // 移除加载状态
+                        $('.loading').remove();
+
+                        console.log('XHR Response:', xhr.responseText);
+                        $('.iscontent').hide();
+                        resultContainer.empty();
+                        resultContainer.append(`
+                            <div class="no-result">
+                                请求失败：${error}
+                            </div>
+                        `);
+                    }
+                });
+                // 使用事件委托绑定点击事件
+                resultContainer.on('click', '.result-card', function (event) {
+                    var id = $(this).attr("attr-id");
+                    var name = $(this).attr("attr-name");
+                    var drama = $(this).attr("attr-drama");
+                    if (drama == "china") {
+                        var detailUrl = "/detail/" + id + "/" + encodeURIComponent(name);
+                    } else if (drama == "foreign") {
+                        var detailUrl = "/series/" + id + "/" + encodeURIComponent(name);
+                    } else if (drama == "korean") {
+                        var detailUrl = "/particulars/" + id + "/" + encodeURIComponent(encodeURIComponent(name));
+                    }
+
+                    // 跳转到详情页
+                    window.location.href = detailUrl;
+                });
+            }
+            $('#searchBtn').click(performSearch);
+
+            performSearch();
+            // $('#searchBtn').click(function () {
+            //     const query = $('#searchInput').val().trim();
+            //     const resultContainer = $('#resultContainer');
+            //     resultContainer.empty();
+
+            //     $('.iscontent').hide();
+            //     $('.loadings').append(`
+            //         <div class="loading">
+            //             <img src="/static/img/loading.gif" alt="加载中..." width="300" height="300">
+            //         </div>
+            //     `);
+
+            //     console.log("加载状态已显示");
+
+            //     if (!query) {
+            //         $('.loading').remove();
+            //         $('.iscontent').show();
+            //         resultContainer.append(`
+            //             <div class="no-result">
+            //                 搜索内容不能为空！
+            //             </div>
+            //         `);
+            //         console.log("搜索内容为空，加载状态已移除");
+            //         return;
+            //     }
+
+            //     $.ajax({
+            //         url: `/search?keyword=${encodeURIComponent(query)}`,
+            //         method: 'GET',
+            //         success: function (response) {
+            //             console.log("请求成功，响应数据：", response);
+            //             $('.loading').remove();
+
+            //             if (Array.isArray(response) && response.length > 0) {
+            //                 resultContainer.empty();
+            //                 $('.iscontent').hide();
+            //                 response.forEach(function (item) {
+            //                     resultContainer.append(`
+            //                         <div class="result-card" attr-id="${item.id}" attr-name="${item.title}">
+            //                             <img src="${item.cover}" alt="${item.name}" title="${item.name}" width="300" height="350" loading="lazy"
+            //                             onerror="this.onerror=null; this.src='${item.img}'" />
+            //                             <h3>${item.name}</h3>
+            //                             <p>剧集数：${item.episodes}</p>
+            //                             <a href="${item.link}" class="detail-link" target="_blank">了解详情</a>
+            //                         </div>
+            //                     `);
+            //                 });
+            //             } else {
+            //                 $('.loading').remove();
+            //                 resultContainer.empty();
+            //                 resultContainer.append(`
+            //                     <div class="no-result">
+            //                         暂未找到相关资源
+            //                     </div>
+            //                 `);
+            //             }
+            //         },
+            //         error: function (xhr, status, error) {
+            //             console.log("请求失败，错误信息：", error);
+            //             // 移除加载状态
+            //             $('.loading').remove();
+
+            //             console.log('XHR Response:', xhr.responseText);
+            //             $('.iscontent').hide();
+            //             resultContainer.empty();
+            //             resultContainer.append(`
+            //                 <div class="no-result">
+            //                     请求失败：${error}
+            //                 </div>
+            //             `);
+            //         }
+            //     });
+
+            //     // 使用事件委托绑定点击事件
+            //     resultContainer.on('click', '.result-card', function (event) {
+            //         var id = $(this).attr("attr-id");
+            //         var name = $(this).attr("attr-name");
+            //         var detailUrl = "/detail/" + id + "/" + encodeURIComponent(name);
+            //         // 跳转到详情页
+            //         window.location.href = detailUrl;
+            //     });
+            // });
+
+            $('#clearBtn').click(function () {
+                var currentUrl = window.location.href;
+
+                var url = new URL(currentUrl);
+                var pathname = url.pathname;
+
+                if (pathname.includes('/search/')) {
+                    var newUrl = pathname.split('/search/')[0];
+                    url.pathname = newUrl;
+
+                    history.pushState({}, '', url.href);
+                }
+                $('#resultContainer').empty();
+                $('#searchInput').val('');
+
+                $('#searchInput').trigger('input');
+                $('.iscontent').show();
+            });
+            function checkContent() {
+                var hasInput = $('#searchInput').val().trim() !== '';
+                var hasResults = $('#resultContainer').children().length > 0;
+                if (hasInput && !hasResults) {
+                    $('.iscontent').hide();
+                } else {
+                    $('.iscontent').show();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

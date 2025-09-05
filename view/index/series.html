@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=5,width=device-width,viewport-fit=cover">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta name="description" content="{$shortdetail.shortinfo.summary}">
+    <meta name="keywords"
+        content="{$shortdetail.shortinfo.key} {notempty name='shortdetail.shortinfo.summary'} -- {$shortdetail.shortinfo.summary}{/notempty}">
+    <meta name="yandex-verification" content="3b668dc11a659934" />
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta property="og:type" content="webpage">
+    <meta property="og:title" content="大陆短剧 | findshortdrama | {$shortdetail.shortinfo.seriesName}">
+    <meta property="og:description" content="{$shortdetail.shortinfo.summary}">
+    <meta property="og:image" content="{$shortdetail.shortinfo.coverUrl}">
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "findshortdrama",
+            "name": "{$shortdetail.shortinfo.seriesName}",
+            "url": "https://www.findshortdrama.com/series/{$shortdetail.shortinfo.seriesId}/{$shortdetail.shortinfo.seriesName}",
+            "image": "{$shortdetail.shortinfo.coverUrl}",
+            "description": "{$shortdetail.shortinfo.summary}",
+            "genre": "{$shortdetail.shortinfo.types}",
+            "datePublished": "{$shortdetail.shortinfo.datePublished}",
+            "publisher": {
+                "@type": "Organization",
+                "name": "findshortdrama",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.findshortdrama.com/favicons.ico"
+                }
+            }
+        }
+    </script>
+    <link rel="icon" href="favicons.ico" type="image/x-icon">
+    <title>{$shortdetail.shortinfo.seriesName}-共{$shortdetail.shortinfo.allEpis}集 | 大陆短剧 | findshortdrama</title>
+    <link rel="icon" href="/favicons.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicons.ico">
+    <link rel="canonical"
+        href="https://www.findshortdrama.com/series/{$shortdetail.shortinfo.seriesId}/{$shortdetail.shortinfo.seriesName}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8035633976285474"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLPZN3RW8G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZLPZN3RW8G');
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        :root {
+            --primary-color: #F5B98A;
+            --secondary-color: #1890ff;
+            --dark-color: #1f1f1f;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            margin: 60px auto;
+        }
+
+        header {
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #header {
+            position: -webkit-sticky;
+            /* position: sticky; */
+            position: fixed;
+            top: 0;
+            background: linear-gradient(135deg, var(--primary-color), #ff7875);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            height: 70px;
+            z-index: 997;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #header .header-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        #header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        #header .logo a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+
+        .navbar ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .navbar a.nav-link {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            white-space: nowrap;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .navbar a.nav-link:hover {
+            color: #f28ed9;
+        }
+
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+
+        .navbar .search-bar input[type="text"] {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 30px;
+            width: 220px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .navbar .search-bar input[type="text"]:focus {
+            outline: none;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1), 0 0 0 3px rgba(255, 184, 138, 0.3);
+            width: 250px;
+        }
+
+        .navbar .search-bar button {
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            margin-left: 5px;
+        }
+
+
+
+        .mobile-nav-toggle {
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            display: none;
+        }
+
+        @media (max-width: 780px) {
+
+            .mobile-nav-toggle {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+            }
+        }
+
+
+        .navbar-mobile {
+            position: fixed;
+            overflow: hidden;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.6);
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .navbar-mobile .mobile-nav-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .navbar-mobile ul {
+            display: block;
+            position: absolute;
+            top: 65px;
+            right: 15px;
+            bottom: 15px;
+            left: 15px;
+            padding: 10px 0;
+            border-radius: 16px;
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            overflow-y: auto;
+        }
+
+        .navbar-mobile a.nav-link {
+            padding: 15px 25px;
+            font-size: 18px;
+            font-weight: 500;
+            color: #333;
+            display: block;
+            transition: all 0.3s;
+            border-left: 3px solid transparent;
+        }
+
+        .navbar-mobile a.nav-link:hover {
+            color: #ff7875;
+            background-color: #fdf2f2;
+            border-left-color: #ff7875;
+        }
+
+        .navbar-mobile .header-search-bar {
+            padding: 20px 25px;
+            margin-top: 10px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .navbar-mobile .search-bar {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .navbar-mobile .search-bar input {
+            width: 100%;
+            height: 48px;
+            padding: 0 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f7f7f7;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            -webkit-appearance: none;
+        }
+
+        .navbar-mobile .search-bar input:focus {
+            border-color: #ff7875;
+            box-shadow: 0 0 0 3px rgba(255, 120, 117, 0.2);
+            outline: none;
+        }
+
+        .navbar-mobile .search-bar #searchHint {
+            position: absolute;
+            bottom: -22px;
+            left: 5px;
+            font-size: 13px;
+            color: #e53935;
+        }
+
+        .navbar-mobile .search-bar button.search-icon {
+            height: 48px;
+            padding: 0 15px;
+            margin-left: 10px;
+            border: none;
+            background: linear-gradient(135deg, #f9a8d4, #ff7875);
+            color: white;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .navbar-mobile .search-bar button.search-icon:hover {
+            opacity: 0.9;
+        }
+
+        .headers {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .headers img {
+            width: 240px;
+            height: 300px;
+            /* height: auto; */
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .headers .info {
+            flex: 1;
+        }
+
+        .headers .info h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .headers .info .stats {
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .headers .info .stats span {
+            margin-right: 10px;
+        }
+
+        .headers .info .description {
+            color: #555;
+            margin-top: 10px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 20px;
+        }
+
+        .buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .buttons .start {
+            background-color: #6a5acd;
+        }
+
+        .buttons .favorite {
+            background-color: #9370db;
+        }
+
+        .recommendations,
+        .ratecommendations,
+        .comprehensives {
+            margin: 15px 0;
+        }
+
+        /* 推荐项行容器 */
+        .recommendations .row,
+        .ratecommendations.row,
+        .comprehensives .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+            display: none;
+            /* 默认隐藏所有行 */
+        }
+
+        .recommendation .title,
+        .ratecommendation .title,
+        .comprehensive .title {
+            color: black;
+            transition: color 0.3s ease;
+        }
+
+        .recommendation:hover .title,
+        .ratecommendation:hover .title,
+        .comprehensive:hover .title {
+            color: #6a5acd;
+        }
+
+        /* 默认显示第一行 */
+        .recommendations .row:first-child {
+            display: flex;
+        }
+
+        /* 单个推荐项样式 */
+        .recommendation,
+        .ratecommendation,
+        .comprehensive {
+            width: calc(20% - 8px);
+            box-sizing: border-box;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .comprehensives {
+            display: flex;
+            column-gap: 10px;
+            row-gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .recommendation:hover,
+        .ratecommendation:hover,
+        .comprehensive:hover {
+            box-shadow: 0 4px 12px rgba(236, 178, 178, 0.1);
+        }
+
+        .recommendation img,
+        .ratecommendation img,
+        .comprehensive img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+        }
+
+        .title {
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .hot {
+            display: flex;
+            justify-content: flex-end;
+
+        }
+
+        .fixedheight {
+            min-height: 14%;
+        }
+
+        .hot span {
+            margin-right: 10px;
+        }
+
+        .hot span:nth-child(2) {
+            color: red;
+        }
+
+        .more,
+        .ratemore {
+            color: #DA70D6;
+            cursor: pointer;
+            text-align: center;
+            padding: 10px;
+            border: 1px dashed #DA70D6;
+            border-radius: 6px;
+        }
+
+        .more:hover,
+        .ratemore:hover {
+            background: #f5d9f3;
+        }
+
+        .home,
+        .rank,
+        .weekly,
+        .foreign,
+        .korean {
+            cursor: pointer;
+            margin-left: 2%;
+        }
+
+        .home:hover,
+        .rank:hover,
+        .weekly:hover,
+        .foreign:hover,
+        .korean:hover {
+            color: #f28ed9;
+        }
+
+        .share {
+            background-color: #d685f4;
+            /* 绿色背景 */
+            border: none;
+            /* 无边框 */
+            color: white;
+            /* 文字颜色 */
+            padding: 10px 20px;
+            /* 内边距 */
+            text-align: center;
+            /* 文字居中 */
+            text-decoration: none;
+            /* 无下划线 */
+            display: inline-block;
+            /* 行内块元素 */
+            font-size: 16px;
+            /* 字体大小 */
+            margin: 4px 2px;
+            /* 外边距 */
+            cursor: pointer;
+            /* 鼠标悬停时显示手型 */
+            border-radius: 5px;
+            /* 圆角边框 */
+            transition: background-color 0.3s ease;
+            /* 平滑过渡效果 */
+        }
+
+        .share:hover {
+            background-color: #a869f0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .comment-section {
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .comment-title {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comment-count {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .comment-form {
+            margin-bottom: 30px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 100px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #4285f4;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+        }
+
+        .comment-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .toolbar-left {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toolbar-left button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .toolbar-left button:hover {
+            opacity: 1;
+        }
+
+        .char-count {
+            color: #999;
+            font-size: 0.9rem;
+            margin-right: 15px;
+        }
+
+        .submit-btn {
+            padding: 8px 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #3367d6;
+        }
+
+        .submit-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        /* 评论列表容器 */
+        .comment-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* 评论项 */
+        .comment-item {
+            border-bottom: 1px solid #ddd;
+            padding: 15px 0;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        /* 评论头部 */
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .comment-time {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* 评论内容 */
+        .comment-content {
+            font-size: 1em;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* 没有评论时的提示 */
+        .no-comments {
+            text-align: center;
+            font-size: 1.2em;
+            color: #999;
+            margin: 20px 0;
+        }
+
+        .menu {
+            display: flex;
+            width: 40%;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), #ff7875);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+
+        @media (max-width: 768px) {
+            .headers {
+                flex-direction: column;
+                align-items: center;
+                padding: 8px;
+            }
+
+            .headers img {
+                width: 360px;
+                height: 480px;
+                margin-bottom: 20px;
+                margin-right: 0px;
+            }
+
+            .logo,
+            .home,
+            .rank,
+            .weekly,
+            .foreign,
+            .korean {
+                font-size: 16px;
+            }
+
+            .search-bar {
+                order: 1;
+                margin-top: 8px;
+            }
+
+            .buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .buttons button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .recommendation,
+            .ratecommendation,
+            #comprehensive {
+                width: 100%;
+            }
+
+            .fixedheight {
+                min-height: 10%;
+            }
+
+            .comment-list {
+                padding: 0 5px;
+            }
+
+            .comment-item {
+                padding: 10px 0;
+            }
+
+            .comment-content {
+                font-size: 14px;
+            }
+
+            .comment-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .comment-time {
+                margin-top: 2px;
+            }
+
+            .comment-input {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header">
+        <div class="header-container">
+
+            <div class="logo" style="font-size: 26px;font-weight: bold;"><a href="/">大陆短剧</a></div>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link home" href="#">首页</a></li>
+                    <li><a class="nav-link weekly" href="#">周更新</a></li>
+                    <li><a class="nav-link rank" href="#">排行</a></li>
+                    <li><a class="nav-link foreign" href="/foreign">国外</a></li>
+                    <li><a class="nav-link korean" href="#">韩剧</a></li>
+                    <li><a class="nav-link article" href="/info">资讯</a></li>
+
+                    <li class="header-search-bar">
+                        <div class="search-bar">
+                            <input type="text" placeholder="请输入搜索内容" autocomplete="off">
+                            <span id="searchHint" class="error" style="color: red; display: none;">请输入搜索内容</span>
+                            <button attr-drama="foreign" class="search-icon">🔍</button>
+                        </div>
+                    </li>
+                </ul>
+
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="headers">
+            <img src="{$shortdetail.shortinfo.coverUrl}" alt="{$shortdetail.shortinfo.seriesName}"
+                title="{$shortdetail.shortinfo.seriesName}" width="300" height="420" loading="lazy"
+                onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+            <div class="info">
+                <h1>{$shortdetail.shortinfo.seriesName}</h1>
+                <div class="stats">
+                    <span>Status: Completed</span>
+                    <span>共{$shortdetail.shortinfo.allEpis}集</span>
+                    <span>update time：{$shortdetail.shortinfo.datePublished}</span>
+                    <span>{$shortdetail.shortinfo.types}</span>
+                    <button class="share">share</button>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p id="modalText">The link has been copied and can be sent to others!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="description">
+                    description： {$shortdetail.shortinfo.summary}
+                </div>
+            </div>
+        </div>
+        <!-- <div class="buttons">
+            <button class="start" attr-url="{$shortdetail.shortinfo.mediaUrl}">{$shortdetail.shortinfo.seriesName}
+                剧集观看</button>
+            <div class="countdown-tip" style="display:none; margin-top:8px; color:#c95df1;">
+                即将跳转，<span class="countdown">8</span>秒后自动前往网盘观看...
+            </div>
+        </div> -->
+        <div>
+            <h2>相关推荐</h2>
+            <div class="recommendations">
+                {foreach name="shortdetail.related_data" id="item"}
+                <div class="recommendation" data-index="0" attr-id="{$item.seriesId}" attr-name="{$item.seriesName}">
+                    <img src="{$item.coverUrl}" alt="{$item.seriesName}" title="{$item.seriesName}" loading="lazy"
+                        onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+                    <div class="title">{$item.seriesName}</div>
+                    <div class="title"
+                        style="height: 14%; overflow: hidden; text-overflow: ellipsis;display: -webkit-box; -webkit-line-clamp: 2;-webkit-box-orient: vertical; word-wrap: break-word;white-space: normal; ">
+                        {$item.summary} </div>
+                </div>
+                {/foreach}
+            </div>
+            <div class="more">More...</div>
+        </div>
+        <div>
+            <h2>为您推荐</h2>
+            <div class="ratecommendations">
+                {foreach name="shortdetail.recommend_data" id="item"}
+                <div class="ratecommendation" data-index="0" attr-id="{$item.seriesId}" attr-name="{$item.seriesName}">
+                    <img src="{$item.coverUrl}" alt="{$item.seriesName}" title="{$item.seriesName}" loading="lazy"
+                        onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+                    <div class="title">{$item.seriesName}</div>
+                    <div class="title"
+                        style="height: 14%; overflow: hidden; text-overflow: ellipsis;display: -webkit-box; -webkit-line-clamp: 2;-webkit-box-orient: vertical; word-wrap: break-word;white-space: normal; ">
+                        {$item.summary} </div>
+                </div>
+                {/foreach}
+            </div>
+            <div class="ratemore">More...</div>
+        </div>
+        <div>
+            <h2>综合榜</h2>
+            <div class="comprehensives">
+                {foreach name="shortdetail.comprehensive_data" id="item"}
+                <div id="comprehensive" class="comprehensive" data-index="0" attr-id="{$item.seriesId}"
+                    attr-name="{$item.seriesName}">
+                    <img src="{$item.coverUrl}" alt="{$item.seriesName}" title="{$item.seriesName}" loading="lazy"
+                        onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+                    <div class="title fixedheight">{$item.seriesName}</div>
+                    <div class="title hot"><span>{$item.viewAndLikeCount}</span><span><svg
+                                style="width: 1rem;height: 1rem; fill: #ff3b30;" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 448 512">
+                                <!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. -->
+                                <path
+                                    d="M159.3 5.4c7.8-7.3 19.9-7.2 27.7 .1c27.6 25.9 53.5 53.8 77.7 84c11-14.4 23.5-30.1 37-42.9c7.9-7.4 20.1-7.4 28 .1c34.6 33 63.9 76.6 84.5 118c20.3 40.8 33.8 82.5 33.8 111.9C448 404.2 348.2 512 224 512C98.4 512 0 404.1 0 276.5c0-38.4 17.8-85.3 45.4-131.7C73.3 97.7 112.7 48.6 159.3 5.4zM225.7 416c25.3 0 47.7-7 68.8-21c42.1-29.4 53.4-88.2 28.1-134.4c-2.8-5.6-5.6-11.2-9.8-16.8l-50.6 58.8s-81.4-103.6-87.1-110.6C133.1 243.8 112 273.2 112 306.8C112 375.4 162.6 416 225.7 416z" />
+                            </svg></span>
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+        </div>
+
+        <div class="comment-section">
+            <h2 class="comment-title">Comment <span class="comment-count">(0)</span></h2>
+
+            <div class="comment-form" attr-id="{$shortdetail.shortinfo.seriesId}">
+                <textarea class="comment-input" placeholder="Write your comment .." rows="4"></textarea>
+                <div class="comment-toolbar">
+                    <div class="toolbar-right">
+                        <span class="char-count">0/500</span>
+                        <button class="submit-btn" disabled>Post a comment</button>
+                    </div>
+                </div>
+            </div>
+            <h2>Comment List</h2>
+            <div class="comment-list">
+            </div>
+        </div>
+    </div>
+    <button class="back-to-top" title="TOP">↑</button>
+    {include file="common/qrcode" /}
+    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.mobile-nav-toggle').on('click', function (event) {
+                event.stopPropagation();
+                $('#navbar').toggleClass('navbar-mobile');
+
+                $(this).toggleClass('bi-list bi-x');
+
+            });
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn();
+                } else {
+                    $('.back-to-top').fadeOut();
+                }
+            });
+
+            // 点击返回顶部
+            $('.back-to-top').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 'smooth');
+                return false;
+            });
+            // $('.start').click(function (e) {
+            //     e.preventDefault(); // 阻止默认跳转行为
+            //         const url = $(this).attr('attr-url');
+
+            //         // 显示提示文字
+            //         $('.countdown-tip').show();
+
+            //         // 开始倒计时
+            //         let seconds = 8;
+            //         const countdownEl = $('.countdown');
+
+            //         const timer = setInterval(() => {
+            //             seconds--;
+            //             countdownEl.text(seconds);
+
+            //             if (seconds <= 0) {
+            //                 clearInterval(timer);
+            //                 $('.countdown-tip').hide(); // 隐藏提示文字
+            //                 window.location.href = url; // 跳转到指定链接
+            //             }
+            //         }, 1000);
+
+            //     // 保留立即跳转方式（如双击触发）
+            //     $(this).dblclick(function () {
+            //         clearInterval(timer);
+            //         $('.countdown-tip').hide();
+            //         window.open(url, '_blank', 'noopener,noreferrer');
+            //     });
+            // });
+            $('.start').click(function () {
+                var dramaName = $(this).text().trim().replace('剧集观看', '');
+                var dramaUrl = $(this).attr('attr-url');
+                // 发送GA事件
+                gtag('event', 'download_click', {
+                    'event_category': 'drama_download',
+                    'event_label': dramaName,
+                    'value': 1,
+                    'drama_url': dramaUrl,
+                    'page_location': window.location.href
+                });
+                var url = $(this).attr('attr-url');
+                window.open(url, '_blank', 'noopener,noreferrer');
+                // window.location.href = url;
+            });
+            $('.share').click(function () {
+                gtag('event', 'share_click', {
+                    'event_category': 'engagement',
+                    'event_label': 'Share button clicked'
+                });
+                var currentUrl = window.location.href;
+                var value = "Please click on the link to view the details of the short drama: " + currentUrl;
+                var tempInput = $('<textarea>').val(value).appendTo('body').select();
+                try {
+                    document.execCommand('copy');
+                    showModal('The link has been copied and can be sent to others!');
+                } catch (err) {
+                    showModal('Copy failed, please manually copy the link:' + currentUrl);
+                }
+                tempInput.remove();
+            });
+
+            function showModal(message) {
+                $('#modalText').text(message);
+                $('#myModal').show();
+            }
+
+            $('.close').click(function () {
+                $('#myModal').hide();
+            });
+            $('.home').click(function () {
+                window.location.href = "/";
+            });
+            $('.rank').click(function () {
+                window.location.href = "/rank";
+            });
+            $('.weekly').click(function () {
+                window.location.href = "/weekly";
+            });
+            $('.korean').click(function () {
+                window.location.href = "/koreans";
+            });
+            $('input[type="text"]').on('input', function () {
+                if ($(this).val().length > 0) {
+                    $('.search-bar').append('<div class="search-suggestions"></div>');
+                } else {
+                    $('.search-suggestions').remove();
+                }
+            });
+
+            $('.search-icon').on('click', function () {
+                var searchText = $('input[type="text"]').val().trim();
+                if (searchText === '') {
+                    $('#searchHint').text('请输入搜索内容').show();
+                } else {
+                    $('#searchHint').hide();
+                    const drama = $(this).attr('attr-drama');
+                    // window.location.href = '/search/' + encodeURIComponent(searchText) + '/' + encodeURIComponent(drama);
+                    var url = '/search/' + encodeURIComponent(searchText) + '/' + encodeURIComponent(drama);
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }
+            });
+            $('.recommendation').click(function () {
+                var id = $(this).attr('attr-id');
+                var name = $(this).attr('attr-name')
+                var url = "/series/" + id + "/" + name;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                // window.location.href = "/series/" + id + "/" + name;
+            });
+            $('.comprehensive').click(function () {
+                var id = $(this).attr('attr-id');
+                var name = $(this).attr('attr-name')
+                var url = "/series/" + id + "/" + name;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                // window.location.href = url;
+
+            });
+            function initRecommendations(containerClass, itemClass, moreClass) {
+                const $container = $(containerClass);
+                const $items = $container.find(itemClass);
+                const itemsPerRow = 5;
+
+                // 清空现有内容
+                $container.empty();
+
+                // 分组创建行
+                let rowCount = 0; // 用于记录当前显示的行数
+                for (let i = 0; i < $items.length; i += itemsPerRow) {
+                    const $row = $('<div class="row" style="display: flex; flex-wrap: wrap;gap:10px;margin-top:15px;"></div>');
+                    for (let j = i; j < i + itemsPerRow && j < $items.length; j++) {
+                        const $item = $items.eq(j).clone().removeClass('hidden');
+                        $row.append($item);
+                    }
+                    $container.append($row.hide()); // 默认隐藏所有行
+                    rowCount++;
+                }
+
+                // 显示第一行
+                $container.find('.row:first').show();
+
+                // 显示/隐藏更多按钮
+                $(moreClass).toggle(rowCount > 1);
+
+                // 点击更多按钮的事件
+                $(moreClass).click(function () {
+                    const $nextRow = $container.find('.row:hidden:first'); // 找到下一行隐藏的行
+                    if ($nextRow.length > 0) {
+                        $nextRow.show(); // 显示下一行
+                    } else {
+                        $(moreClass).text("没有更多了").off('click'); // 如果没有更多行，更新按钮文字并禁用点击
+                    }
+                });
+            }
+
+            // 初始化两个推荐板块
+            initRecommendations('.recommendations', '.recommendation', '.more');
+            initRecommendations('.ratecommendations', '.ratecommendation', '.ratemore');
+
+            // 使用事件委托处理点击
+            $('.container').on('click', '.recommendation, .ratecommendation', function () {
+                const id = $(this).attr('attr-id');
+                const name = $(this).attr('attr-name');
+                const url = "/series/" + id + "/" + name;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                // window.location.href = "/series/" + id + "/" + name;
+            });
+
+            //评论
+            const $commentInput = $('.comment-input');
+            const $charCount = $('.char-count');
+            const $submitBtn = $('.submit-btn');
+            const $commentList = $('.comment-list');
+            const $commentCount = $('.comment-count');
+            const $commentForm = $('.comment-form');
+            const foreignId = $commentForm.attr('attr-id');
+
+            // 初始化加载评论列表
+            loadComments();
+
+            // 字符计数和发布按钮状态
+            $commentInput.on('input', function () {
+                const currentLength = $(this).val().length;
+                const maxLength = 500;
+                $charCount.text(`${currentLength}/${maxLength}`);
+                $charCount.css('color', currentLength > maxLength * 0.9 ? '#ff6b6b' : '#999');
+                $submitBtn.prop('disabled', currentLength === 0 || currentLength > maxLength);
+            });
+
+            // 发布评论
+            $submitBtn.on('click', function () {
+                const commentText = $commentInput.val().trim();
+                if (!commentText) return;
+
+                $submitBtn.prop('disabled', true).text('发布中...');
+                $.ajax({
+                    url: `/submits`,
+                    type: "POST",
+                    data: {
+                        foreignId: foreignId,
+                        content: commentText
+                    },
+                    success: function (response) {
+                        // console.log('subres', response);return;
+                        if (response.code == 1) {
+                            $commentInput.val('');
+                            $charCount.text('0/500');
+
+                            loadComments();
+                        } else {
+                            console.log('bbb', response.message);
+                            // alert('发布失败: ' + (response.message || '未知错误'));
+                        }
+                    },
+                    error: function (xhr) {
+                        console.log('ppp', xhr.responseJSON?.message);
+                        // alert('发布出错: ' + (xhr.responseJSON?.message || '服务器错误'));
+                    },
+                    complete: function () {
+                        $submitBtn.prop('disabled', false).text('发布评论');
+                    }
+                });
+            });
+
+            // 加载评论列表函数
+            function loadComments() {
+                $.ajax({
+                    url: `/comments/foreignId/` + foreignId,
+                    type: 'GET',
+                    success: function (response) {
+                        // console.log('res', response);
+                        if (response.code == 1 && response.data) {
+                            renderComments(response.data);
+                        } else {
+                            console.error('获取评论失败');
+                        }
+                    },
+                    error: function () {
+                        console.error('获取评论出错');
+                    }
+                });
+            }
+
+            // 渲染评论列表函数
+            function renderComments(comments) {
+                $commentList.empty(); // 清空现有评论
+
+                if (comments.length === 0) {
+                    $commentList.append('<div class="no-comments">No comments yet, come grab the sofa quickly~</div>');
+                    $commentCount.text('(0)');
+                    return;
+                }
+
+                comments.forEach(function (comment) {
+                    const commentHtml = `
+                        <div class="comment-item" data-id="${comment.id}">
+                            <div class="comment-header">
+                                <span class="comment-author">Anonymous user</span>
+                                <span class="comment-time">${formatTime(comment.created_at)}</span>
+                            </div>
+                            <div class="comment-content">${comment.content}</div>
+                        </div>
+                    `;
+                    $commentList.append(commentHtml);
+                });
+
+                $commentCount.text('(' + comments.length + ')');
+            }
+
+            // 时间格式化函数
+            function formatTime(timestamp) {
+                const date = new Date(timestamp);
+                const now = new Date();
+                const diff = Math.floor((now - date) / 1000); // 秒差
+
+                if (diff < 60) return '刚刚';
+                if (diff < 3600) return Math.floor(diff / 60) + '分钟前';
+                if (diff < 86400) return Math.floor(diff / 3600) + '小时前';
+
+                return date.getFullYear() + '-' +
+                    (date.getMonth() + 1).toString().padStart(2, '0') + '-' +
+                    date.getDate().toString().padStart(2, '0');
+            }
+
+            // 快捷键提交
+            $commentInput.on('keydown', function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    $submitBtn.click();
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

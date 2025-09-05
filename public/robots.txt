@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://www.findshortdrama.com/sitemap.xml

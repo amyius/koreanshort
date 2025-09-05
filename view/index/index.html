@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="initial-scale=1,maximum-scale=5,width=device-width,viewport-fit=cover">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description"
+        content="全网热门短剧每日闪电更新，短剧免费观看，高清资源免费畅看无套路！甜宠高糖撒不停、霸总强推超带感、重生逆袭爽翻天，还有穿越古装、虐恋催泪、烧脑悬疑等全类型精选，承包你的所有看剧需求！手机电脑随时刷，无广告纯净播放，让你追剧不等待，精彩不停歇！">
+    <meta name="keywords"
+        content="短剧，免费短剧在线观看，短剧免费观看，每日更新热门短剧，反转神剧情短剧，最新短剧推荐，爆款短剧，热播短剧大全，大陆免费短剧，短剧在线看，短视频剧集，高糖短剧，逆袭短剧，无广告短剧，duanju,findshortdrama">
+    <meta name="yandex-verification" content="3b668dc11a659934" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta property="og:type" content="webpage">
+    <meta property="og:title" content="大陆短剧 | findshortdrama">
+    <meta property="og:description"
+        content="全网热门短剧每日闪电更新，高清资源免费畅看无套路！甜宠高糖撒不停、霸总强推超带感、重生逆袭爽翻天，还有穿越古装、虐恋催泪、烧脑悬疑等全类型精选，承包你的所有看剧需求！手机电脑随时刷，无广告纯净播放，让你追剧不等待，精彩不停歇！">
+    <meta property="og:image" content="https://www.findshortdrama.com/favicons.ico">
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "大陆短剧 | findshortdrama",
+            "description": "短剧，免费短剧在线观看，每日更新热门短剧，反转神剧情短剧，最新短剧推荐",
+            "url": "https://www.findshortdrama.com",
+            "publisher": {
+                "@type": "Organization",
+                "name": "findshortdrama",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.findshortdrama.com/favicons.ico"
+                }
+            }
+        }
+    </script>
+    <link rel="icon" href="/favicons.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicons.ico">
+    <link rel="canonical" href="https://www.findshortdrama.com">
+    <title>大陆短剧 | findshortdrama</title>
+    <!-- Goodagle tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZLPZN3RW8G"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZLPZN3RW8G');
+    </script>
+    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
+            height: auto;
+        }
+
+        :root {
+            --primary-color: #4A5FC9;
+            /* 深蓝色替代原来的橙色 */
+            --secondary-color: #9C6FE3;
+            /* 紫色作为辅助色 */
+            --dark-color: #1f1f1f;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .body-content {
+            padding: 20px;
+        }
+
+        .carousel {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-item img,
+        img {
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 300%;
+            max-height: 400px;
+            /* 三张图片的宽度 */
+            position: relative;
+        }
+
+        .carousel-item {
+            flex: 0 0 33.33%;
+            /* 每个item占1/3宽度 */
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            transition: transform 0.5s ease, z-index 0.5s ease;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            transition: transform 0.5s ease;
+        }
+
+        /* 设置中间图片凸出，两侧图片凹进去 */
+        .carousel-item:nth-child(2) img {
+            transform: scale(1.2);
+            /* 中间图片放大 */
+            z-index: 10;
+        }
+
+        .carousel-item:nth-child(1) img,
+        .carousel-item:nth-child(3) img {
+            transform: scale(0.8);
+            /* 两侧图片缩小 */
+            z-index: 5;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0px;
+        }
+
+        .tabs div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .tabs div.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+        }
+
+        .content-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .content-card {
+            position: relative;
+            width: calc(25% - 20px);
+            height: 400px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .content-card:hover {
+            cursor: pointer;
+            border-radius: 12px;
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 3 / 5;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .content-card:hover .card-image {
+            transform: scale(1.1);
+            border-radius: 12px;
+        }
+
+        .blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .content-card:hover .blur-layer {
+            opacity: 1;
+        }
+
+        .card-title,
+        .card-episodes {
+            margin: 5px 0;
+        }
+
+        .play-button {
+           background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+
+        .play-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .home,
+        .rank,
+        .weekly,
+        .foreign,
+        .koreans {
+            cursor: pointer;
+            margin-left: 2%;
+        }
+
+        .home:hover,
+        .rank:hover,
+        .weekly:hover,
+        .foreign:hover,
+        .koreans:hover {
+            color: #f28ed9;
+        }
+
+        .menu {
+            display: flex;
+            width: 40%;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+
+        .qr-code-panel {
+            height: 240px !important;
+        }
+
+        @media (max-width: 780px) {
+
+            .carousel-item {
+                flex: 0 0 100%;
+                width: 100%;
+            }
+
+            .carousel-item img {
+                transform: scale(1);
+            }
+
+            .content-card {
+                width: calc(50% - 20px);
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {include file="common/header" /}
+    <main>
+        <div class="body-content">
+            <div class="carousel">
+                <div class="carousel-container">
+                    {foreach name="carousel_data" id="item"}
+                    <div class="carousel-item" attr-name="{$item['name']}" attr-id="{$item['id']}">
+                        <img src="{$item['cover']}" alt="{$item['name']}" title="{$item['name']}" loading="eager"
+                            fetchpriority="high" class="card-image" width="300" height="400"
+                            onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+                    </div>
+                    {/foreach}
+                </div>
+                <div class="carousel-controls">
+                    <button class="prev-btn">‹</button>
+                    <button class="next-btn">›</button>
+                </div>
+            </div>
+            <div class="tabs">
+                <div class="active">最新</div>
+                <div>热播</div>
+            </div>
+            <div class="content-cards" id="today-updates">
+                {if isset($shortinfo)}
+                {foreach name="shortinfo" id="item"}
+                {if is_array($item) && isset($item['id'])}
+                <div class="content-card" attr-id="{$item['id']}" attr-name="{$item['name']}">
+                    <img src="{$item['cover']}" alt="{$item['name']}" title="{$item['name']}" class="card-image"
+                        width="300" height="400" loading="lazy"
+                        onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+                    <div class="blur-layer">
+                        <div class="card-title">剧名: {$item['name']}</div>
+                        <div class="card-episodes">剧集数：{$item['lastSerialNo']}</div>
+                        <button class="play-button">了解详情</button>
+                    </div>
+                </div>
+                {/if}
+                {/foreach}
+                {/if}
+            </div>
+            <div class="content-cards" id="hot-shows" style="display: none;">
+                {foreach name="shorthotinfo" id="item"}
+                <div class="content-card" attr-id="{$item['id']}">
+                    <img src="{$item['cover']}" alt="{$item['name']}" title="{$item['name']}" class="card-image"
+                        width="300" height="400" loading="lazy"
+                        onerror="this.onerror=null; this.src='https://picsum.photos/300/400?random='+Math.random()">
+                    <div class="blur-layer">
+                        <div class="card-title">剧名: {$item['name']}</div>
+                        <div class="card-episodes">剧集数：{$item['lastSerialNo']}</div>
+                        <button class="play-button">了解详情</button>
+                    </div>
+                </div>
+                {/foreach}
+            </div>
+        </div>
+    </main>
+    {include file="common/footer" /}
+    <button class="back-to-top" title="返回顶部">↑</button>
+    {include file="common/qrcode" /}
+    <script>
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn();
+                } else {
+                    $('.back-to-top').fadeOut();
+                }
+            });
+
+            // 点击返回顶部
+            $('.back-to-top').click(function (event) {
+                event.stopPropagation();
+                $('html, body').animate({ scrollTop: 0 }, 'smooth');
+                return false;
+            });
+            // 懒加载逻辑
+            function lazyLoad() {
+                var windowHeight = $(window).height();
+                var scrollPosition = $(window).scrollTop();
+
+                $('.carousel-item img, .card-image').each(function () {
+                    var imageOffset = $(this).offset().top;
+                    if (imageOffset < scrollPosition + windowHeight) {
+                        var src = $(this).data('src');
+                        if (src) {
+                            $(this).attr('src', src);
+                            $(this).removeAttr('data-src');
+                        }
+                    }
+                });
+            }
+
+            lazyLoad();
+
+            $(window).on('scroll', function () {
+                lazyLoad();
+            });
+            // 轮播图功能
+            let currentIndex = 0;
+            let itemsPerView = 3;
+            let itemWidth = 100 / itemsPerView; // 每张图片的宽度百分比
+            const totalItems = $('.carousel-item').length;
+
+            function adjustCarousel() {
+                if (window.innerWidth <= 768) {
+                    itemsPerView = 1;
+                } else {
+                    itemsPerView = 3;
+                }
+                itemWidth = 100 / itemsPerView;
+                updateCarousel();
+            }
+
+            function updateCarousel() {
+                const translateX = -currentIndex * itemWidth;
+                $('.carousel-container').css('transform', `translateX(${translateX}%)`);
+                updateTransform();
+            }
+
+            function updateTransform() {
+                $('.carousel-item img').css('transform', 'scale(1)');
+
+                if (itemsPerView === 3) {
+                    $('.carousel-item img').eq(currentIndex + 1).css('transform', 'scale(1.2)'); // 中间图片放大
+                    $('.carousel-item img').eq(currentIndex).css('transform', 'scale(0.8)'); // 左侧图片缩小
+                    $('.carousel-item img').eq(currentIndex + 2).css('transform', 'scale(0.8)'); // 右侧图片缩小
+                }
+            }
+
+            function nextSlide() {
+                if (currentIndex < totalItems - itemsPerView) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }
+
+            function prevSlide() {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = totalItems - itemsPerView;
+                }
+                updateCarousel();
+            }
+
+            function startAutoPlay() {
+                setInterval(nextSlide, 3000); // 每3秒自动切换到下一组
+            }
+
+            // 手动点击切换
+            $('.next-btn').click(nextSlide);
+            $('.prev-btn').click(prevSlide);
+
+            // 启动自动轮播
+            startAutoPlay();
+
+            // 调整轮播图布局
+            adjustCarousel();
+
+            // 监听窗口大小变化
+            $(window).resize(function () {
+                adjustCarousel();
+            });
+
+            // Tab切换逻辑
+            $('.tabs div').click(function () {
+                $('.tabs div').removeClass('active');
+                $(this).addClass('active');
+
+                $('.content-cards').hide();
+
+                if ($(this).index() === 0) {
+                    $('#today-updates').show();
+                    lazyLoad();
+                } else if ($(this).index() === 1) {
+                    $('#hot-shows').show();
+                    lazyLoad();
+                }
+            });
+
+            // 内容卡片点击逻辑
+            $('.content-card').click(function () {
+                var id = $(this).attr('attr-id');
+                var name = $(this).attr('attr-name');
+                var url = "/particulars/" + id + "/" + name;
+                // window.open(url, '_blank', 'noopener,noreferrer');
+                window.location.href = "/particulars/" + id + "/" + name;
+            });
+            $('.carousel-item').click(function () {
+                var id = $(this).attr('attr-id');
+                var name = $(this).attr('attr-name');
+                var url = "/particulars/" + id + "/" + name;
+                window.open(url, '_blank', 'noopener,noreferrer');
+                // window.location.href = "/particulars/" + id + "/" + name;
+            });
+            
+        });
+
+    </script>
+</body>
+
+</html>
