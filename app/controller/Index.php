@@ -31,7 +31,7 @@ class Index extends BaseController
                 $shorthotinfo[$key]['cover'] = $domain . '/' . $value['cover'];
             }
         }
-        $carousel_data = $shortModel->limit(6)->select()->toArray();
+        $carousel_data = $shortModel->order('rank', 'asc')->limit(6)->select()->toArray();
         foreach ($carousel_data as $key => $value) {
             $domain = $this->request->domain();
             if ($value['cover'] == '' || $value['cover'] == 'null') {
@@ -113,7 +113,7 @@ class Index extends BaseController
             $shortinfo['cover'] = $domain . $shortinfo['cover'];
         }
         if ($shortinfo['publishTime']) {
-            $shortinfo['publishTime'] = date('Y-m-d');
+            $shortinfo['publishTime'] = date('Y-m-d', strtotime($shortinfo['publishTime']));
         }
         if ($shortinfo['relateStars']) {
             $starIds = json_decode($shortinfo['relateStars'], true);
