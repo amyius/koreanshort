@@ -83,7 +83,7 @@
             margin: 60px auto;
         }
 
-        
+
 
         .headers {
             display: flex;
@@ -612,7 +612,7 @@
 </head>
 
 <body>
-     {include file="common/header" /}
+    {include file="common/header" /}
     <div class="container">
         <div class="headers">
             <img src="{$shortdetail.shortinfo.cover}" alt="{$shortdetail.shortinfo.name}" referrerpolicy="no-referrer"
@@ -642,13 +642,21 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="buttons">
-            <button class="start" attr-url="{$shortdetail.shortinfo.mediaUrl}">{$shortdetail.shortinfo.name}
+        <div class="buttons">
+            {if $shortdetail.shortinfo.oneselfquarklink}
+            <button class="start" attr-url="{$shortdetail.shortinfo.oneselfquarklink}">{$shortdetail.shortinfo.name}
                 剧集观看</button>
-            <div class="countdown-tip" style="display:none; margin-top:8px; color:#c95df1;">
-                即将跳转，<span class="countdown">8</span>秒后自动前往网盘观看...
-            </div>
-        </div> -->
+            {/if}
+            <!-- <div class="countdown-tip" style="display:none; margin-top:8px; color:#c95df1;">
+                    即将跳转，<span class="countdown">8</span>秒后自动前往网盘观看...
+                </div> -->
+            {if $shortdetail.shortinfo.oneselfbaidulink}
+            <button class="starts" style="margin-left: 20px;background-color: #8d7dee;"
+                attr-url="{$shortdetail.shortinfo.oneselfbaidulink}">
+                {$shortdetail.shortinfo.name} 剧集观看2
+            </button>
+            {/if}
+        </div>
         <div class="actor-list">
             <div class="titles">演员名单</div>
             <div class="actors">
