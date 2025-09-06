@@ -22,13 +22,11 @@ class koreansubmitUrl extends Command
     }
     protected function execute(Input $input, Output $output)
     {
-        $shortplayModel = Db::name('koreanshort');
-        $shortplay = Db::name('shortdata')
-        ->order('publishTime desc')
-                ->orderRaw('RAND()')
-                ->limit(98)
-                ->select()
-                ->toArray();
+        $shortplay = Db::name('koreanshort')
+            ->orderRaw('RAND()')
+            ->limit(97)
+            ->select()
+            ->toArray();
 
         $urlList = [];
         foreach ($shortplay as $key => $value) {
