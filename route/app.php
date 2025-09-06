@@ -32,8 +32,4 @@ Route::group('comments', function () {
 });
 
 Route::get('sitemap.xml', 'Sitemap/index');
-Route::get('sitemapcurrent.xml', 'Sitemapcurrent/index');
 Route::get('sitemapinfo.xml', 'Sitemapinfo/index');
-Route::get('sitemapforeign.xml', 'Sitemapforeign/index');
-Route::get('sitemapkorean.xml', 'Sitemapkorean/index');
-Route::get('sitemapprevious.xml', 'Sitemapprevious/index');
