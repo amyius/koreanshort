@@ -13,14 +13,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="no-transform">
     <meta property="og:type" content="webpage">
-    <meta property="og:title" content="韩剧 | findshortdrama | {$shortdetail.shortinfo.name}">
+    <meta property="og:title" content="韩剧 | koreanshort | {$shortdetail.shortinfo.name}">
     <meta property="og:description" content="{$shortdetail.shortinfo.summarized}">
     <meta property="og:image" content="{$shortdetail.shortinfo.cover}">
     <!-- 结构化数据 -->
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "findshortdrama",
+            "@type": "koreanshort",
             "name": "{$shortdetail.shortinfo.name}",
             "url": "https://www.koreanshort.com/particulars/{$shortdetail.shortinfo.id}/{$shortdetail.shortinfo.name}",
             "image": "{$shortdetail.shortinfo.cover}",
@@ -29,7 +29,7 @@
             "datePublished": "{$shortdetail.shortinfo.publishTime}",
             "publisher": {
                 "@type": "Organization",
-                "name": "findshortdrama",
+                "name": "koreanshort",
                 "logo": {
                 "@type": "ImageObject",
                 "url": "https://www.koreanshort.com/favicons.ico"
@@ -38,7 +38,7 @@
         }
     </script>
     <link rel="icon" href="favicons.ico" type="image/x-icon">
-    <title>{$shortdetail.shortinfo.name}-共{$shortdetail.shortinfo.allEpis}集 | 大陆韩剧 | findshortdrama</title>
+    <title>{$shortdetail.shortinfo.name}-共{$shortdetail.shortinfo.allEpis}集 | 大陆韩剧 | koreanshort</title>
     <link rel="icon" href="/favicons.ico" type="image/x-icon">
     <link rel="canonical"
         href="https://www.koreanshort.com/particulars/{$shortdetail.shortinfo.id}/{$shortdetail.shortinfo.name}">
