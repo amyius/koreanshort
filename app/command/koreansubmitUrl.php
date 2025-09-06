@@ -30,7 +30,7 @@ class koreansubmitUrl extends Command
 
         $urlList = [];
         foreach ($shortplay as $key => $value) {
-            $urlList[] = 'https://www.koreanshort.com/detail/' . $value['id'] . '/' . $value['name'];
+            $urlList[] = 'https://www.koreanshort.com/particulars/' . $value['id'] . '/' . $value['name'];
         }
         $urlList[] = 'https://www.koreanshort.com';
         $urlList[] = 'https://www.koreanshort.com/info';
