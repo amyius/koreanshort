@@ -128,21 +128,29 @@ class Index extends BaseController
         if ($shortinfo['publishTime']) {
             $shortinfo['publishTime'] = date('Y-m-d', strtotime($shortinfo['publishTime']));
         }
-        if ($shortinfo['relateStars']) {
-            $starIds = json_decode($shortinfo['relateStars'], true);
 
-            $starList = $castModel->where('sid', 'in', $starIds)
+        if (!empty($shortinfo['relateStars'])) {
+            $starIds   = json_decode($shortinfo['relateStars'], true);
+            $starList  = $castModel->where('sid', 'in', $starIds)
                 ->select()
                 ->toArray();
-
-
-            foreach ($starList as $k => $item) {
-                if (!empty($item['thumb'])) {
-                    $starList[$k]['thumb'] = $domain . $item['thumb'];
-                }
+        } else {
+            $crewNames = array_filter(array_map('trim', explode(',', $shortinfo['crew'] ?? '')));
+            $starList  = [];
+            if ($crewNames) {
+                $starList = $castModel->where('name', 'in', $crewNames)
+                    ->select()
+                    ->toArray();
             }
-            $shortinfo['starList'] = $starList;
         }
+
+        foreach ($starList as $k => $item) {
+            if (!empty($item['thumb'])) {
+                $starList[$k]['thumb'] = $domain . $item['thumb'];
+            }
+        }
+
+        $shortinfo['starList'] = $starList;
 
         $all_data = $koreansModel->orderRaw('publishTime desc')->orderRaw('RAND()')->select()->toArray();
 
@@ -483,7 +491,7 @@ class Index extends BaseController
                     } else {
                         $image = $item['image'] ?? [];
                     }
-
+                    $item['lastSerialNo'] = $item['lastSerialNo'] ?? '';
                     $item['thumb'] = $image['thumb'] ?? '';
                     $item['poster'] = $image['poster'] ?? '';
                     $item['posterThumb'] = $image['posterThumb'] ?? '';
