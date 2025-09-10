@@ -14,34 +14,37 @@ class Index extends BaseController
         $shortinfo = $shortModel->order('publishTime', 'desc')->limit(32)->select()->toArray();
         $domain = $this->request->domain();
         foreach ($shortinfo as $key => $value) {
-            if (empty($value['cover'])) {
-                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
-            } else if (!preg_match('/^https?:\/\//i', $value['cover'])) {
-                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($value['cover'], '/');
+            $cover = trim($value['cover'] ?? '');
+            if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+                $shortinfo[$key]['cover'] = $cover;
+            } elseif (empty($cover)) {
+                $shortinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
             } else {
-                $shorthotinfo[$key]['cover'] = $value['cover'];
+                $shortinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
         }
+
         $shorthotinfo = $shortModel->orderRaw('RAND()')->limit(32)->select()->toArray();
         foreach ($shorthotinfo as $key => $value) {
-
-            if (empty($value['cover'])) {
+            $cover = trim($value['cover'] ?? '');
+            if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+                $shorthotinfo[$key]['cover'] = $cover;
+            } elseif (empty($cover)) {
                 $shorthotinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
-            } else if (!preg_match('/^https?:\/\//i', $value['cover'])) {
-                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($value['cover'], '/');
             } else {
-                $shorthotinfo[$key]['cover'] = $value['cover'];
+                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
         }
+
         $carousel_data = $shortModel->order('rank', 'asc')->limit(6)->select()->toArray();
         foreach ($carousel_data as $key => $value) {
-            $domain = $this->request->domain();
-            if (empty($value['cover'])) {
-                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
-            } else if (!preg_match('/^https?:\/\//i', $value['cover'])) {
-                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($value['cover'], '/');
+            $cover = trim($value['cover'] ?? '');
+            if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+                $carousel_data[$key]['cover'] = $cover;
+            } elseif (empty($cover)) {
+                $carousel_data[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
             } else {
-                $shorthotinfo[$key]['cover'] = $value['cover'];
+                $carousel_data[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
         }
         $response = [
@@ -114,12 +117,13 @@ class Index extends BaseController
             $shortinfo['status'] = "连载中";
         }
         $shortinfo['allEpis'] = $shortinfo['conerMemo'];
-        if (empty($shortinfo['cover'])) {
-            $$shortinfo['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
-        } else if (!preg_match('/^https?:\/\//i', $shortinfo['cover'])) {
-            $$shortinfo['cover'] = $this->request->domain() . '/' . ltrim($shortinfo['cover'], '/');
+        $cover = trim($shortinfo['cover'] ?? '');
+        if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+            $shortinfo['cover'] = $cover;
+        } elseif (empty($cover)) {
+            $shortinfo['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
         } else {
-            $$shortinfo['cover'] = $shortinfo['cover'];
+            $shortinfo['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
         }
         if ($shortinfo['publishTime']) {
             $shortinfo['publishTime'] = date('Y-m-d', strtotime($shortinfo['publishTime']));
