@@ -496,7 +496,14 @@ class Index extends BaseController
                     $item['poster'] = $image['poster'] ?? '';
                     $item['posterThumb'] = $image['posterThumb'] ?? '';
                     $item['updPoster'] = $image['updPoster'] ?? '';
-                    $item['cover'] = isset($item['cover']) ? $this->request->domain() . $item['cover'] : '';
+                    $cover = trim($item['cover'] ?? '');
+                    if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+                        $item['cover'] = $cover;
+                    } elseif (empty($cover)) {
+                        $item['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                    } else {
+                        $item['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
+                    }
                     unset($item['image']);
                     $intro = $item['intro'] ?? '';
                     preg_match('/类型:&nbsp;([^<]+)/i', $intro, $matches);
