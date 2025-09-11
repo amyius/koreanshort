@@ -643,16 +643,16 @@
             </div>
         </div>
         <div class="buttons">
-            {if $shortdetail.shortinfo.oneselfquarklink}
-            <button class="start" attr-url="{$shortdetail.shortinfo.oneselfquarklink}">{$shortdetail.shortinfo.name}
+            {if $shortdetail.shortinfo.quark}
+            <button class="start" attr-url="{$shortdetail.shortinfo.quark}">{$shortdetail.shortinfo.name}
                 剧集观看</button>
             {/if}
             <!-- <div class="countdown-tip" style="display:none; margin-top:8px; color:#c95df1;">
                     即将跳转，<span class="countdown">8</span>秒后自动前往网盘观看...
                 </div> -->
-            {if $shortdetail.shortinfo.oneselfbaidulink}
+            {if $shortdetail.shortinfo.baidu}
             <button class="starts" style="margin-left: 20px;background-color: #8d7dee;"
-                attr-url="{$shortdetail.shortinfo.oneselfbaidulink}">
+                attr-url="{$shortdetail.shortinfo.baidu}">
                 {$shortdetail.shortinfo.name} 剧集观看2
             </button>
             {/if}

@@ -119,6 +119,21 @@ class Index extends BaseController
         if ($shortinfo['name'] || $shortinfo['crew']) {
             $shortinfo['key'] = $shortinfo['name'] . ',' . $shortinfo['crew'] . ',' . implode(',', $shortinfo['tag'] ?? []);
         }
+        if ($shortinfo['oneselfquarklink']) {
+            $shortinfo['quark'] = $shortinfo['oneselfquarklink'];
+        } else if ($shortinfo['quarklink'] != "未找到" || $shortinfo['quarklink'] != "失效链接") {
+            $shortinfo['quark'] = $shortinfo['quarklink'];
+        } else {
+            $shortinfo['quark'] = "";
+        }
+
+        if ($shortinfo['oneselfbaidulink']) {
+            $shortinfo['baidu'] = $shortinfo['oneselfbaidulink'];
+        } else if ($shortinfo['baidulink'] != "未找到" || $shortinfo['baidulink'] != "失效链接") {
+            $shortinfo['baidu'] = $shortinfo['baidulink'];
+        } else {
+            $shortinfo['baidu'] = "";
+        }
 
         if ($shortinfo['finished']) {
             $shortinfo['status'] = "已完结";
@@ -175,6 +190,7 @@ class Index extends BaseController
         $related_data       = $this->processIntroFields($this->normalizeImageFields(array_slice($all_data, $start_index, $end_index - $start_index)));
         $recommend_data     = $this->processIntroFields($this->normalizeImageFields($koreansModel->orderRaw('publishTime desc')->orderRaw('RAND()')->limit(8)->select()->toArray()));
         $comprehensive_data = $this->processIntroFields($this->normalizeImageFields($koreansModel->order('publishTime desc')->limit(10)->select()->toArray()));
+
         $response = [
             'shortinfo' => $shortinfo, // 详情
             'related_data' => $related_data, // 相关推荐 
@@ -689,18 +705,20 @@ class Index extends BaseController
             return;
         }
 
-        $html = preg_replace('#<p>\s*&nbsp;\s*</p>#i', '', $item['intro']);
+        $html = $item['intro'];
 
-        if (!preg_match('#^\s*<p>#i', $html)) {
-            $html = '<p>' . $html;
+        if (preg_match('#^简介：#u', $html)) {
+            $html = '<p>' . $html . '</p>';
         }
+
+        $html = preg_replace('#<p>\s*&nbsp;\s*</p>#i', '', $html);
 
         preg_match('#<p>(.*?)</p>#is', $html, $introMatch);
         $item['summarized'] = trim(strip_tags($introMatch[1] ?? ''));
 
         $fields = [
             '编剧'           => '#编剧:&nbsp;([^<]+)#i',
-            '主演'           => '#主演:&nbsp;([^<]+)#i',
+            '主演'           => '#主演:&nbsp;(.+?)<br#is',
             '类型'           => '#类型:&nbsp;([^<]+)#i',
             '制片国家/地区' => '#制片国家/地区:&nbsp;([^<]+)#i',
             '语言'           => '#语言:&nbsp;([^<]+)#i',
@@ -716,15 +734,20 @@ class Index extends BaseController
             if ($value === '') continue;
 
             if ($label === '主演') {
-                $value = implode(' / ', preg_split('#\s*/\s*#u', $value));
+                $actors = preg_split('#\s*/\s*#u', $value);
+                $value = implode(' / ', array_map('trim', $actors));
             }
 
             $out .= "<div>{$label}：{$value}</div>";
         }
 
         $item['metaHtml'] = $out;
-        if ($item['publishTime']) {
-            $item['publishTime'] = date('Y-m-d');
+
+        if (!empty($item['publishTime'])) {
+            $timestamp = strtotime($item['publishTime']);
+            if ($timestamp !== false) {
+                $item['publishTime'] = date('Y-m-d', $timestamp);
+            }
         }
     }
 }
