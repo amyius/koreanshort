@@ -73,40 +73,49 @@ class Index extends BaseController
             $shortinfo['intro'] = preg_replace('/^<p>(.*?)<\/p>$/is', '$1', $shortinfo['intro']);
         }
         if (!empty($shortinfo['intro'])) {
-            $html = preg_replace('#<p>\s*&nbsp;\s*</p>#i', '', $shortinfo['intro']);
+            $isHtml = strpos(trim($shortinfo['intro']), '<p>') === 0;
 
-            if (!preg_match('#^\s*<p>#i', $html)) {
-                $html = '<p>' . $html;
+            $shortinfo['introOriginal'] = $shortinfo['intro'];
+
+            if ($isHtml) {
+                preg_match('#<p>(.*?)</p>#is', $shortinfo['intro'], $m);
+                $shortinfo['summarized'] = trim(strip_tags($m[1] ?? ''));
+            } else {
+                $shortinfo['summarized'] = trim(preg_replace('/^简介：\s*/u', '', $shortinfo['intro']));
             }
 
-            preg_match('#<p>(.*?)</p>#is', $html, $introMatch);
-            $shortinfo['summarized'] = trim(strip_tags($introMatch[1] ?? ''));
-            $fields = [
-                '编剧'           => '#编剧:&nbsp;([^<]+)#i',
-                '主演'           => '#主演:&nbsp;([^<]+)#i',
-                '类型'           => '#类型:&nbsp;([^<]+)#i',
-                '制片国家/地区' => '#制片国家/地区:&nbsp;([^<]+)#i',
-                '语言'           => '#语言:&nbsp;([^<]+)#i',
-                '集数'           => '#集数:&nbsp;([^<]+)#i',
-                '又名'           => '#又名:&nbsp;([^<]+)#i',
-            ];
+            if ($isHtml && preg_match('#类型:&nbsp;([^<]+)#i', $shortinfo['intro'], $m)) {
+                $raw = strip_tags(html_entity_decode($m[1]));
+                $shortinfo['tag'] = array_map('trim', explode('/', $raw));
+            } else {
+                $shortinfo['tag'] = ['其他'];
+            }
 
-            $out = '';
-            foreach ($fields as $label => $pattern) {
-                preg_match($pattern, $html, $m);
-                $value = trim(strip_tags(html_entity_decode($m[1] ?? '')));
-
-                if ($value === '') continue;
-
-                if ($label === '主演') {
-                    $value = implode(' / ', preg_split('#\s*/\s*#u', $value));
+            $shortinfo['metaHtml'] = '';
+            if ($isHtml) {
+                $fields = [
+                    '编剧' => '#编剧:&nbsp;([^<]+)#i',
+                    '主演' => '#主演:&nbsp;([^<]+)#i',
+                    '类型' => '#类型:&nbsp;([^<]+)#i',
+                    '制片国家/地区' => '#制片国家/地区:&nbsp;([^<]+)#i',
+                    '语言' => '#语言:&nbsp;([^<]+)#i',
+                    '集数' => '#集数:&nbsp;([^<]+)#i',
+                    '又名' => '#又名:&nbsp;([^<]+)#i',
+                ];
+                $out = '';
+                foreach ($fields as $label => $pat) {
+                    if (preg_match($pat, $shortinfo['intro'], $m)) {
+                        $val = trim(strip_tags(html_entity_decode($m[1])));
+                        if ($label === '主演') {
+                            $val = implode(' / ', preg_split('#\s*/\s*#u', $val));
+                        }
+                        $out .= "<div>{$label}：{$val}</div>";
+                    }
                 }
-
-                $out .= "<div>{$label}：{$value}</div>";
+                $shortinfo['metaHtml'] = $out;
             }
-
-            $shortinfo['metaHtml'] = $out;
         }
+
         if ($shortinfo['name'] || $shortinfo['crew']) {
             $shortinfo['key'] = $shortinfo['name'] . ',' . $shortinfo['crew'] . ',' . implode(',', $shortinfo['tag'] ?? []);
         }
@@ -130,23 +139,29 @@ class Index extends BaseController
         }
 
         if (!empty($shortinfo['relateStars'])) {
-            $starIds   = json_decode($shortinfo['relateStars'], true);
-            $starList  = $castModel->where('sid', 'in', $starIds)
+            $starIds  = json_decode($shortinfo['relateStars'], true);
+            $starList = $castModel->where('sid', 'in', $starIds)
                 ->select()
                 ->toArray();
         } else {
-            $crewNames = array_filter(array_map('trim', explode(',', $shortinfo['crew'] ?? '')));
-            $starList  = [];
+            $crewRaw = preg_replace('/^主演[：:]\s*/u', '', $shortinfo['crew'] ?? '');
+
+            $crewNames = array_unique(
+                array_filter(
+                    array_map('trim', preg_split('/[、,]/u', $crewRaw)),
+                    fn($v) => $v !== ''
+                )
+            );
+            $starList = [];
             if ($crewNames) {
                 $starList = $castModel->where('name', 'in', $crewNames)
                     ->select()
                     ->toArray();
             }
         }
-
         foreach ($starList as $k => $item) {
-            if (!empty($item['thumb'])) {
-                $starList[$k]['thumb'] = $domain . $item['thumb'];
+            if (!empty($item['thumb']) && !str_starts_with($item['thumb'], 'http')) {
+                $starList[$k]['thumb'] = rtrim($domain, '/') . '/' . ltrim($item['thumb'], '/');
             }
         }
 
