@@ -181,8 +181,10 @@ class Index extends BaseController
         }
 
         $shortinfo['starList'] = $starList;
+        $shortinfo['description'] = mb_substr($shortinfo['summarized'], 0, 142) .
+                            (mb_strlen($shortinfo['summarized']) > 142 ? '...' : '');
         $all_data = $koreansModel->orderRaw('publishTime desc')->orderRaw('RAND()')->select()->toArray();
-
+        
         $total_count = count($all_data);
         $start_index = max(0, floor($total_count / 2) - 11);
         $end_index = min($total_count, $start_index + 16);
