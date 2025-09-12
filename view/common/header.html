@@ -269,9 +269,11 @@
 </style>
 <header id="header">
     <div class="header-container">
-
+        {if $types == 1}
         <h1 class="logo"><a href="/">欧亚韩剧场</a></h1>
-
+        {else}
+        <div style="font-size: 24px;font-weight: bold;" class="logo"><a href="/">欧亚韩剧场</a></div>
+        {/if}
         <nav id="navbar" class="navbar">
             <ul>
                 <li><a class="nav-link active" href="/">首页</a></li>

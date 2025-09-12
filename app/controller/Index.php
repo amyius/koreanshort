@@ -23,7 +23,6 @@ class Index extends BaseController
                 $shortinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
         }
-
         $shorthotinfo = $shortModel->orderRaw('RAND()')->limit(32)->select()->toArray();
         foreach ($shorthotinfo as $key => $value) {
             $cover = trim($value['cover'] ?? '');
@@ -48,6 +47,7 @@ class Index extends BaseController
             }
         }
         $response = [
+            'types' => 1,
             'shortinfo' => $shortinfo,
             'shorthotinfo' => $shorthotinfo,
             'carousel_data' => $carousel_data
@@ -181,7 +181,6 @@ class Index extends BaseController
         }
 
         $shortinfo['starList'] = $starList;
-
         $all_data = $koreansModel->orderRaw('publishTime desc')->orderRaw('RAND()')->select()->toArray();
 
         $total_count = count($all_data);
@@ -197,7 +196,7 @@ class Index extends BaseController
             'recommend_data' => $recommend_data, // 为您推荐(随机8条数据)
             'comprehensive_data' => $comprehensive_data, //综合榜(10条)
         ];
-        return view('particulars', ['shortdetail' => $response]);
+        return view('particulars', ['shortdetail' => $response, 'types' => 0]);
     }
 
     public function search()
@@ -557,10 +556,11 @@ class Index extends BaseController
             $response = [
                 'koreandata' => $data,
                 'pagination' => $pagination,
+                'types' => 1,
             ];
             return json($response);
         }
-        return view('koreans');
+        return view('koreans', ['types' => 1]);
     }
 
     public function info()
@@ -610,7 +610,7 @@ class Index extends BaseController
             'pagination' => $pagination,
         ];
 
-        return view('info', ['info' => $response]);
+        return view('info', ['info' => $response, 'types' => 0]);
     }
 
     public function article($id)
@@ -633,7 +633,7 @@ class Index extends BaseController
             'shortinfo' => $shortinfo,
             'koreaninfo' => $koreaninfo,
         ];
-        return view('article', ['article' => $response]);
+        return view('article', ['article' => $response, 'types' => 0]);
     }
 
     private function processArticleName($name)
