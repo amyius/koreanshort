@@ -121,7 +121,7 @@ class Index extends BaseController
         }
         if ($shortinfo['oneselfquarklink']) {
             $shortinfo['quark'] = $shortinfo['oneselfquarklink'];
-        } else if ($shortinfo['quarklink'] != "未找到" || $shortinfo['quarklink'] != "失效链接") {
+        } else if ($shortinfo['quarklink'] != "未找到" && $shortinfo['quarklink'] != "失效链接") {
             $shortinfo['quark'] = $shortinfo['quarklink'];
         } else {
             $shortinfo['quark'] = "";
@@ -129,7 +129,7 @@ class Index extends BaseController
 
         if ($shortinfo['oneselfbaidulink']) {
             $shortinfo['baidu'] = $shortinfo['oneselfbaidulink'];
-        } else if ($shortinfo['baidulink'] != "未找到" || $shortinfo['baidulink'] != "失效链接") {
+        } else if ($shortinfo['baidulink'] != "未找到" && $shortinfo['baidulink'] != "失效链接") {
             $shortinfo['baidu'] = $shortinfo['baidulink'];
         } else {
             $shortinfo['baidu'] = "";
