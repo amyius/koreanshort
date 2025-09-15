@@ -20,22 +20,22 @@
     <script type="application/ld+json">
         {
             "@context": "https://schema.org",
-            "@type": "koreanshort",
+            "@type": "韩剧 | koreanshort",
             "name": "{$shortdetail.shortinfo.name}",
             "url": "https://www.koreanshort.com/particulars/{$shortdetail.shortinfo.id}/{$shortdetail.shortinfo.name}",
             "image": "{$shortdetail.shortinfo.cover}",
-            "description": "{:$shortdetail.shortinfo.summarized}",
+            "description": "{$shortdetail.shortinfo.summarized}",
             "episodeNumber": "{$shortdetail.shortinfo.allEpis}",
             "datePublished": "{$shortdetail.shortinfo.publishTime}",
             "publisher": {
                 "@type": "Organization",
                 "name": "koreanshort",
                 "logo": {
-                "@type": "ImageObject",
-                "url": "https://www.koreanshort.com/favicons.ico"
+                    "@type": "ImageObject",
+                    "url": "https://www.koreanshort.com/favicons.ico"
                 }
             }
-        }
+        }       
     </script>
     <link rel="icon" href="favicons.ico" type="image/x-icon">
     <title>{$shortdetail.shortinfo.name}-共{$shortdetail.shortinfo.allEpis}集 | 大陆韩剧 | koreanshort</title>
