@@ -9,7 +9,6 @@ class Index extends BaseController
 {
     public function index()
     {
-        $yesterdayDate = date('Y-m-d', strtotime("-1 day"));
         $shortModel = new \app\model\Koreanshort();
         $shortinfo = $shortModel->order('publishTime', 'desc')->limit(32)->select()->toArray();
         $domain = $this->request->domain();
@@ -18,7 +17,7 @@ class Index extends BaseController
             if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
                 $shortinfo[$key]['cover'] = $cover;
             } elseif (empty($cover)) {
-                $shortinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                $shortinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
             } else {
                 $shortinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
@@ -29,19 +28,19 @@ class Index extends BaseController
             if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
                 $shorthotinfo[$key]['cover'] = $cover;
             } elseif (empty($cover)) {
-                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                $shorthotinfo[$key]['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
             } else {
                 $shorthotinfo[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
         }
 
-        $carousel_data = $shortModel->order('rank', 'asc')->limit(6)->select()->toArray();
+        $carousel_data = $shortModel->where('cover', '<>', '')->orderRaw('RAND()')->limit(6)->select()->toArray();
         foreach ($carousel_data as $key => $value) {
             $cover = trim($value['cover'] ?? '');
             if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
                 $carousel_data[$key]['cover'] = $cover;
             } elseif (empty($cover)) {
-                $carousel_data[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                $carousel_data[$key]['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
             } else {
                 $carousel_data[$key]['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
             }
@@ -145,7 +144,7 @@ class Index extends BaseController
         if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
             $shortinfo['cover'] = $cover;
         } elseif (empty($cover)) {
-            $shortinfo['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+            $shortinfo['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
         } else {
             $shortinfo['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
         }
@@ -212,7 +211,7 @@ class Index extends BaseController
             $data = $koreansModel->where('name', 'like', '%' . $keyword . '%')->order('publishTime desc')->select();
             foreach ($data as $item) {
                 if (empty($item['cover'])) {
-                    $$item['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                    $$item['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
                 } else if (!preg_match('/^https?:\/\//i', $item['cover'])) {
                     $$item['cover'] = $this->request->domain() . '/' . ltrim($item['cover'], '/');
                 } else {
@@ -222,7 +221,7 @@ class Index extends BaseController
                 $item['name'] = $item['name'];
                 $item['title'] = $item['name'];
                 $item['cover'] = $this->request->domain() . $item['cover'];
-                $item['img'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                $item['img'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
                 $item['episodes'] = $item['conerMemo'];
                 $item['link'] = "/particulars/" . $item['id'] . "/" . rawurlencode(rawurlencode($item['name']));
                 $item['drama'] = "korean";
@@ -295,7 +294,7 @@ class Index extends BaseController
             foreach ($rank as $item) {
                 $domain = $this->request->domain();
                 if ($item['cover'] == '' || $item['cover'] == 'null') {
-                    $item['cover'] = $domain . "/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg";
+                    $item['cover'] = $domain . "/uploads/images/koreandefualt.png";
                 } else if (!preg_match('/^https?:\/\//', $item['cover'])) {
                     $item['cover'] =  '/' . $item['cover'];
                 }
@@ -345,7 +344,7 @@ class Index extends BaseController
             $domain = $this->request->domain();
             foreach ($weekly as $key => $value) {
                 if ($value['cover'] == '' || $value['cover'] == NULL) {
-                    $weekly[$key]['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                    $weekly[$key]['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
                 } else if (!preg_match('/^https?:\/\//', $value['cover'])) {
                     $weekly[$key]['cover'] = $domain . '/' . $value['cover'];
                 } else {
@@ -532,7 +531,7 @@ class Index extends BaseController
                     if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
                         $item['cover'] = $cover;
                     } elseif (empty($cover)) {
-                        $item['cover'] = $this->request->domain() . '/uploads/images/img_4129fc24b709a042692db1d3db0328b7.jpg';
+                        $item['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
                     } else {
                         $item['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
                     }
