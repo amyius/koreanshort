@@ -435,8 +435,8 @@ class Index extends BaseController
             $shortinfo['publishTime'] = date('Y-m-d', strtotime($shortinfo['publishTime']));
         }
 
-        $shortinfo['description'] = mb_substr($shortinfo['intro'], 0, 142) .
-            (mb_strlen($shortinfo['intro']) > 142 ? '...' : '');
+        $intro = $shortinfo['intro'] ?? '';
+        $shortinfo['description'] = mb_substr($intro, 0, 142) . (mb_strlen($intro) > 142 ? '...' : '');
         $all_data = $ThaitaiwaneseModel->orderRaw('years desc')->orderRaw('RAND()')->select()->toArray();
 
         $total_count = count($all_data);
