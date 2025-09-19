@@ -383,10 +383,8 @@
                     var id = $(this).attr("attr-id");
                     var name = $(this).attr("attr-name");
                     var drama = $(this).attr("attr-drama");
-                    if (drama == "china") {
-                        var detailUrl = "/detail/" + id + "/" + encodeURIComponent(name);
-                    } else if (drama == "foreign") {
-                        var detailUrl = "/series/" + id + "/" + encodeURIComponent(name);
+                    if (drama == "thai") {
+                        var detailUrl = "/concrete/" + id + "/" + encodeURIComponent(name);
                     } else if (drama == "korean") {
                         var detailUrl = "/particulars/" + id + "/" + encodeURIComponent(encodeURIComponent(name));
                     }
