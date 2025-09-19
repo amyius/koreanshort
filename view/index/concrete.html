@@ -638,9 +638,15 @@
                         </div>
                     </div>
                 </div>
+                {if $shortdetail.shortinfo.intro}
                 <div class="description">
                     简介：{$shortdetail.shortinfo.intro|raw}
                 </div>
+                {else}
+                <div class="description">
+                    简介：暂无简介
+                </div>
+                {/if}
                 <div class="qtxs">
                     {$shortdetail.shortinfo.metaHtml|raw}
                 </div>
