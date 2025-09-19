@@ -438,7 +438,7 @@ class Index extends BaseController
         $intro = $shortinfo['intro'] ?? '';
         $shortinfo['description'] = mb_substr($intro, 0, 142) . (mb_strlen($intro) > 142 ? '...' : '');
         $all_data = $ThaitaiwaneseModel->orderRaw('years desc')->orderRaw('RAND()')->select()->toArray();
-
+        $shortinfo['intro'] = $intro ?? '暂无简介';
         $total_count = count($all_data);
         $start_index = max(0, floor($total_count / 2) - 11);
         $end_index = min($total_count, $start_index + 16);
