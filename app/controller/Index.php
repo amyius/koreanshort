@@ -253,9 +253,10 @@ class Index extends BaseController
         if ($foreignId   > 0)          $validCount++;
         if ($shortdataId > 0)          $validCount++;
         if ($koreanId    !== '')       $validCount++;
+        if ($thaiId    > 0)            $validCount++;
 
         if ($validCount !== 1) {
-            return json(['code' => 0, 'msg' => '必须且只能提供 foreignId、shortdataId、koreanId 中的一个']);
+            return json(['code' => 0, 'msg' => '必须且只能提供 foreignId、shortdataId、koreanId、thaiId 中的一个']);
         }
 
         if ($content === '') {
