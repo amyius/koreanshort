@@ -304,6 +304,7 @@ class Index extends BaseController
 
         $query = \app\model\Thaitaiwanese::where('area', 'LIKE', '%台湾%')
             ->whereBetween('years', [$startYear, $endYear])
+            ->orderRaw("CASE WHEN cover IS NULL OR cover = '' THEN 1 ELSE 0 END")
             ->order('created_at', 'desc');
 
         $total      = $query->count();
@@ -358,6 +359,7 @@ class Index extends BaseController
 
         $query = \app\model\Thaitaiwanese::where('area', 'LIKE', '%泰国%')
             ->whereBetween('years', [$startYear, $endYear])
+            ->orderRaw("CASE WHEN cover IS NULL OR cover = '' THEN 1 ELSE 0 END")
             ->order('created_at', 'desc');
 
         $total      = $query->count();

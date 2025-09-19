@@ -379,8 +379,7 @@
             const parts = location.pathname.split('/').filter(Boolean);
             const want = parts[0] || 'home'; 
             const url = '/search/' + encodeURIComponent(searchText) + '/' + want;
-            console.log('跳转URL:', url);  return false;
-            // window.open(url, '_blank', 'noopener,noreferrer');
+            window.open(url, '_blank', 'noopener,noreferrer');
         }
     });
 
