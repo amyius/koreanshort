@@ -15,9 +15,10 @@ Route::group('', function () {
     Route::any('/detail/:id/:name?', 'Index/detail');
     Route::any('/search/:keyword/:drama?', 'Index/search')->pattern(['keyword' => '[\w\s%]+']);;
     Route::post('/submits', 'Index/submits');
-    Route::get('/rank', 'Index/rank');
-    Route::get('/weekly/:id?', 'Index/weekly');
-    Route::get('/foreign/:id?', 'Index/foreign');
+    Route::get('/taiwanese/:years?', 'Index/taiwanese');
+    Route::any('/concrete/:id/:name?','Index/concrete');
+    Route::get('/focus/:id/:name?', 'Index/focus');
+    Route::get('/thai/:years?', 'Index/thai');
     Route::get('/series/:id/:name?', 'Index/series');
     Route::any('/koreans/:years?','Index/koreans');
     Route::any('/particulars/:id/:name?','Index/particulars');
@@ -29,7 +30,9 @@ Route::group('comments', function () {
     Route::any('shortdataId/:shortdataId', 'Comments/index');
     Route::any('foreignId/:foreignId', 'Comments/index');
     Route::any('koreanId/:koreanId', 'Comments/index');
+    Route::any('thaiId/:thaiId', 'Comments/index');
 });
 
 Route::get('sitemap.xml', 'Sitemap/index');
 Route::get('sitemapinfo.xml', 'Sitemapinfo/index');
+Route::get('sitemapthaitaiwanese.xml', 'Sitemapthaitaiwanese/index');

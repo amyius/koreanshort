@@ -278,6 +278,8 @@
             <ul>
                 <li><a class="nav-link active" href="/">首页</a></li>
                 <li><a class="nav-link" href="/koreans">分类</a></li>
+                <li><a class="nav-link" href="/taiwanese">台剧</a></li>
+                <li><a class="nav-link" href="/thai">泰剧</a></li>
                 <li><a class="nav-link" href="/info">资讯</a></li>
 
                 <li class="header-search-bar">
@@ -367,15 +369,18 @@
             }
         });
         function performSearch() {
-            var searchText = $('input[type="text"]').val().trim();
+            const searchText = $('input[type="text"]').val().trim();
             if (searchText === '') {
                 $('#searchHint').text('请输入搜索内容').show();
-            } else {
-                $('#searchHint').hide();
-                var url = '/search/' + encodeURIComponent(searchText);
-                window.open(url, '_blank', 'noopener,noreferrer');
-                // window.location.href = '/search/' + encodeURIComponent(searchText);
+                return;
             }
+            $('#searchHint').hide();
+
+            const parts = location.pathname.split('/').filter(Boolean);
+            const want = parts[0] || 'home'; 
+            const url = '/search/' + encodeURIComponent(searchText) + '/' + want;
+            console.log('跳转URL:', url);  return false;
+            // window.open(url, '_blank', 'noopener,noreferrer');
         }
     });
 

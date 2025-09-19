@@ -181,9 +181,9 @@ class Index extends BaseController
 
         $shortinfo['starList'] = $starList;
         $shortinfo['description'] = mb_substr($shortinfo['summarized'], 0, 142) .
-                            (mb_strlen($shortinfo['summarized']) > 142 ? '...' : '');
+            (mb_strlen($shortinfo['summarized']) > 142 ? '...' : '');
         $all_data = $koreansModel->orderRaw('publishTime desc')->orderRaw('RAND()')->select()->toArray();
-        
+
         $total_count = count($all_data);
         $start_index = max(0, floor($total_count / 2) - 11);
         $end_index = min($total_count, $start_index + 16);
@@ -207,26 +207,35 @@ class Index extends BaseController
             $keyword = $this->request->param('keyword');
             $drama   = $this->request->param('drama', 'korean');
             $domain = $this->request->domain();
-            $koreansModel = new \app\model\Koreanshort();
-            $data = $koreansModel->where('name', 'like', '%' . $keyword . '%')->order('publishTime desc')->select();
-            foreach ($data as $item) {
-                if (empty($item['cover'])) {
-                    $$item['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
-                } else if (!preg_match('/^https?:\/\//i', $item['cover'])) {
-                    $$item['cover'] = $this->request->domain() . '/' . ltrim($item['cover'], '/');
-                } else {
-                    $$item['cover'] = $item['cover'];
+            if ($drama == "thai") {
+                $ThaitaiwaneseModel = new \app\model\Thaitaiwanese();
+                $data = $ThaitaiwaneseModel->where('name', 'like', '%' . $keyword . '%')->order('years desc')->select();
+                foreach ($data as $item) {
+                    $item['id'] = $item['id'];
+                    $item['name'] = $item['name'];
+                    $item['title'] = $item['name'];
+                    $item['cover'] = $this->request->domain() . $item['cover'];
+                    $item['img'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
+                    $item['episodes'] = $item['conerMemo'];
+                    $item['link'] = "/concrete/" . $item['id'] . "/" . rawurlencode(rawurlencode($item['name']));
+                    $item['drama'] = "thai";
                 }
-                $item['id'] = $item['id'];
-                $item['name'] = $item['name'];
-                $item['title'] = $item['name'];
-                $item['cover'] = $this->request->domain() . $item['cover'];
-                $item['img'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
-                $item['episodes'] = $item['conerMemo'];
-                $item['link'] = "/particulars/" . $item['id'] . "/" . rawurlencode(rawurlencode($item['name']));
-                $item['drama'] = "korean";
+                return json($data);
+            } else if ($drama == "korean") {
+                $koreansModel = new \app\model\Koreanshort();
+                $data = $koreansModel->where('name', 'like', '%' . $keyword . '%')->order('publishTime desc')->select();
+                foreach ($data as $item) {
+                    $item['id'] = $item['id'];
+                    $item['name'] = $item['name'];
+                    $item['title'] = $item['name'];
+                    $item['cover'] = $this->request->domain() . $item['cover'];
+                    $item['img'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
+                    $item['episodes'] = $item['conerMemo'];
+                    $item['link'] = "/particulars/" . $item['id'] . "/" . rawurlencode(rawurlencode($item['name']));
+                    $item['drama'] = "korean";
+                }
+                return json($data);
             }
-            return json($data);
         } else {
             return View('search');
         }
@@ -237,6 +246,7 @@ class Index extends BaseController
         $foreignId   = (int)$this->request->param('foreignId', 0);
         $shortdataId = (int)$this->request->param('shortdataId', 0);
         $koreanId    = trim($this->request->param('koreanId', ''));
+        $thaiId    = trim($this->request->param('thaiId', ''));
         $content     = trim($this->request->param('content', ''));
 
         $validCount = 0;
@@ -260,6 +270,8 @@ class Index extends BaseController
             $commentModel->shortdata_id = $shortdataId;
         } elseif ($foreignId) {
             $commentModel->foreign_id = $foreignId;
+        } elseif ($thaiId) {
+            $commentModel->thai_id = $thaiId;
         } else {
             $commentModel->korean_id = $koreanId;
         }
@@ -269,225 +281,167 @@ class Index extends BaseController
         return json(['code' => 1, 'msg' => '发布成功']);
     }
 
-    public function rank()
+    public function taiwanese()
     {
-        if ($this->request->isAjax()) {
-            $params = $this->request->param();
-            // type为0时总榜 hotnum ，1为最新日榜 rdj,2为周榜 zdj,3为月榜 ydj,
-            $type = isset($params['type']) ? $params['type'] : '0';
-            $shortModel = new \app\model\Shortdata();
-            if ($type == 1) {
-                $yesterdayDate = date('Y-m-d', strtotime("-1 day"));
-                $rank = $shortModel->where('updatedate', $yesterdayDate)->where('is_down', 0)->order('rdj desc')->order('cover desc')->limit(30)->select();
-            } else if ($type == 2) {
-                $startOfWeek = date('Y-m-d', strtotime('this week monday'));
-                $endOfWeek = date('Y-m-d', strtotime('this week sunday'));
-                $rank = $shortModel->whereBetween('updatedate', [$startOfWeek, $endOfWeek])->where('is_down', 0)->order('zdj desc')->order('cover desc')->limit(30)->select();
-            } else if ($type == 3) {
-                // 计算本月的起始日期和结束日期
-                $startOfMonth = date('Y-m-01');
-                $endOfMonth = date('Y-m-t');
-                $rank = $shortModel->whereBetween('updatedate', [$startOfMonth, $endOfMonth])->where('is_down', 0)->order('ydj desc')->order('cover desc')->limit(30)->select();
+        if (!$this->request->isAjax()) {
+            return view('taiwanese', ['types' => 1]);
+        }
+
+        $page      = max((int)$this->request->param('page', 1), 1);
+        $years     = trim($this->request->param('years', '2025'));
+        $pageSize  = 20;
+
+        if ($years === '2015-2019') {
+            $startYear = 2015;
+            $endYear   = 2019;
+        } elseif ($years === '1-2014') {
+            $startYear = 1990;
+            $endYear   = 2014;
+        } else {
+            $startYear = $endYear = (int)$years;
+        }
+
+        $query = \app\model\Thaitaiwanese::where('area', 'LIKE', '%台湾%')
+            ->whereBetween('years', [$startYear, $endYear])
+            ->order('created_at', 'desc');
+
+        $total      = $query->count();
+        $lastPage   = max(ceil($total / $pageSize), 1);
+        $data       = $query->page($page, $pageSize)
+            ->select();
+
+        $domain = $this->request->domain();
+        $data->each(function ($item) use ($domain) {
+            $cover = trim($item['cover'] ?? '');
+            if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+                $item['cover'] = $cover;
+            } elseif ($cover === '') {
+                $item['cover'] = $domain . '/uploads/images/koreandefualt.png';
             } else {
-                $rank = $shortModel->where('is_down', 0)->order('hotnum desc')->order('cover desc')->limit(30)->select();
+                $item['cover'] = $domain . '/' . ltrim($cover, '/');
             }
-            foreach ($rank as $item) {
-                $domain = $this->request->domain();
-                if ($item['cover'] == '' || $item['cover'] == 'null') {
-                    $item['cover'] = $domain . "/uploads/images/koreandefualt.png";
-                } else if (!preg_match('/^https?:\/\//', $item['cover'])) {
-                    $item['cover'] =  '/' . $item['cover'];
-                }
-                $title = $this->processArticleName($item['name']);
-                $item['title'] = $title['title'];
-                if ($item['tag'] == '' || $item['tag'] == null) {
-                    $item['tag'] = ['其他'];
-                } else {
-                    $item['tag'] = explode('|', $item['tag']);
-                }
-            }
-            return json(['code' => 1, 'data' => $rank]);
-        }
-        return view('rank');
-    }
+            $item['rank'] = rand(1, 100);
+        });
 
-    public function weekly()
-    {
-        if ($this->request->isAjax()) {
-            $shortModel = new \app\model\Shortdata();
-            $params = $this->request->param();
-            $date = isset($params['date']) ? $params['date'] : date('Y-m-d');
-
-            $hotWeekly = $shortModel->where('updatedate', $date)
-                ->where('is_down', 0)
-                ->order('hotnum', 'desc')
-                ->order('cover', 'desc')
-                ->limit(3)
-                ->select();
-            foreach ($hotWeekly as &$item) {
-                $item['is_hot'] = 1;
-            }
-
-            // 获取剩余数据
-            $remainingWeekly = $shortModel->where('updatedate', $date)
-                ->where('is_down', 0)
-                ->order('hotnum', 'desc')
-                ->order('cover', 'desc')
-                ->limit(3, PHP_INT_MAX)
-                ->select();
-            foreach ($remainingWeekly as &$item) {
-                $item['is_hot'] = 0;
-            }
-
-            // 合并数据
-            $weekly = $hotWeekly->merge($remainingWeekly);
-            $domain = $this->request->domain();
-            foreach ($weekly as $key => $value) {
-                if ($value['cover'] == '' || $value['cover'] == NULL) {
-                    $weekly[$key]['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
-                } else if (!preg_match('/^https?:\/\//', $value['cover'])) {
-                    $weekly[$key]['cover'] = $domain . '/' . $value['cover'];
-                } else {
-                    $weekly[$key]['cover'] = $value['cover'];
-                }
-                $title = $this->processArticleName($value['name']);
-                $weekly[$key]['title'] = $title['title'];
-                $yesterday = date('Y-m-d', strtotime('-1 day'));
-                if ($date == $yesterday) {
-                    $weekly[$key]['is_new'] = 1;
-                } else {
-                    $weekly[$key]['is_new'] = 0;
-                }
-
-                if ($value['tag'] && $value['tag'] != "其他") {
-                    $tag = explode('|', $value['tag']);
-                    $value['tag'] = $tag;
-                } else {
-                    $weekly[$key]['tag'] = [$value['tag']];
-                }
-            }
-
-            //查询当前这周数据
-            // if ($type == 1) {
-            //     $mondayDate = date('Y-m-d', strtotime('this week monday'));
-            //     $rank = $shortModel->where('updatedate', $mondayDate)->order('zdj desc')->order('cover desc')->select();
-            // } else if ($type == 2) {
-            //     // 计算本周二的日期
-            //     $tuesdayDate = date('Y-m-d', strtotime('this week tuesday'));
-            //     $rank = $shortModel->where('updatedate', $tuesdayDate)->order('zdj desc')->order('cover desc')->select();
-            // } else if ($type == 3) {
-            //     // 计算本周三的日期
-            //     $wednesdayDate = date('Y-m-d', strtotime('this week wednesday'));
-            //     $rank = $shortModel->where('updatedate', $wednesdayDate)->order('zdj desc')->order('cover desc')->select();
-            // } else if ($type == 4) {
-            //     // 计算本周四的日期
-            //     $thursdayDate = date('Y-m-d', strtotime('this week thursday'));
-            //     $rank = $shortModel->where('updatedate', $thursdayDate)->order('zdj desc')->order('cover desc')->select();
-            // } else if ($type == 5) {
-            //     // 计算本周五的日期
-            //     $fridayDate = date('Y-m-d', strtotime('this week friday'));
-            //     $rank = $shortModel->where('updatedate', $fridayDate)->order('zdj desc')->order('cover desc')->select();
-            // } else if ($type == 6) {
-            //     // 计算本周六的日期
-            //     $saturdayDate = date('Y-m-d', strtotime('this week saturday'));
-            //     $rank = $shortModel->where('updatedate', $saturdayDate)->order('zdj desc')->order('cover desc')->select();
-            // } else if ($type == 7) {
-            //     // 计算本周日的日期
-            //     $sundayDate = date('Y-m-d', strtotime('this week sunday'));
-            //     $rank = $shortModel->where('updatedate', $sundayDate)->order('zdj desc')->order('cover desc')->select();
-            // }
-            return json(['code' => 1, 'data' => $weekly]);
-        }
-        // $startOfWeek = date('Y-m-d', strtotime('this week monday'));
-        // $endOfWeek = date('Y-m-d', strtotime('this week sunday'));
-        $yesterday = date('Y-m-d', strtotime('-1 day'));
-        $sevenDaysAgo = date('Y-m-d', strtotime('-7 days', strtotime($yesterday)));
-
-        // 格式化日期
-        $startOfWeek = $sevenDaysAgo;
-        $endOfWeek = date('Y-m-d', strtotime($yesterday));
-        $shortModel = new \app\model\Shortdata();
-        $yesterdayDate = date('Y-m-d', strtotime("-1 day"));
-        $yesterdayUpdateCount = $shortModel->where('is_down', 0)->where('updatedate', $yesterdayDate)->count();
-        return view('weekly', [
-            'startOfWeek' => $startOfWeek,
-            'endOfWeek' => $endOfWeek,
-            'yesterdayUpdateCount' => $yesterdayUpdateCount
-        ]);
-    }
-
-    public function foreign()
-    {
-        if ($this->request->isAjax()) {
-            $page = max((int)$this->request->param('page', 1), 1);
-            $day  = trim($this->request->param('day', 'all'));
-
-            $pageSize = 20;
-
-            $foreignModel = new \app\model\Foreigndata();
-
-            $query = $foreignModel->order('datePublished', 'desc');
-
-            switch ($day) {
-                case 'month':
-                    $start = date('Y-m-d 00:00:00', strtotime('first day of this month'));
-                    $end   = date('Y-m-d 23:59:59',  strtotime('last day of this month'));
-                    $query->whereBetween('datePublished', [$start, $end]);
-                    break;
-
-                case 'all':
-                default:
-                    break;
-            }
-
-            $total = (clone $query)->count();
-            $lastPage = max(ceil($total / $pageSize), 1);
-
-            $data = $query
-                ->page($page, $pageSize)
-                ->select()
-                ->each(function ($item) {
-                    $item->datePublished = date('Y-m-d', strtotime($item->datePublished));
-                    $item->types         = [$item->types];
-                });
-
-            $pagination = [
+        return json([
+            'koreandata' => $data->toArray(),
+            'pagination' => [
                 'current_page' => $page,
                 'last_page'    => $lastPage,
                 'per_page'     => $pageSize,
                 'total'        => $total,
-            ];
-            $response = [
-                'foreigndata' => $data,
-                'pagination' => $pagination,
-            ];
-            return json($response);
-        }
-        return view('foreign');
+            ],
+            'types' => 1,
+        ]);
     }
 
-    public function series($id)
+    public function thai()
     {
-        $foreignModel = new \app\model\Foreigndata();
-        $shortinfo = $foreignModel->where('seriesId', $id)->find();
+        if (!$this->request->isAjax()) {
+            return view('thai', ['types' => 1]);
+        }
 
-        if ($shortinfo['seriesName'] || $shortinfo['types']) {
-            $shortinfo['key'] = $shortinfo['seriesName'] . ',' . $shortinfo['types'];
+        $page      = max((int)$this->request->param('page', 1), 1);
+        $years     = trim($this->request->param('years', '2025'));
+        $pageSize  = 20;
+
+        if ($years === '2015-2019') {
+            $startYear = 2015;
+            $endYear   = 2019;
+        } elseif ($years === '1-2014') {
+            $startYear = 1990;
+            $endYear   = 2014;
+        } else {
+            $startYear = $endYear = (int)$years;
         }
-        if ($shortinfo['datePublished']) {
-            $shortinfo['datePublished'] = date('Y-m-d', strtotime($shortinfo['datePublished']));
+
+        $query = \app\model\Thaitaiwanese::where('area', 'LIKE', '%泰国%')
+            ->whereBetween('years', [$startYear, $endYear])
+            ->order('created_at', 'desc');
+
+        $total      = $query->count();
+        $lastPage   = max(ceil($total / $pageSize), 1);
+        $data       = $query->page($page, $pageSize)
+            ->select();
+
+        $domain = $this->request->domain();
+        $data->each(function ($item) use ($domain) {
+            $cover = trim($item['cover'] ?? '');
+            if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+                $item['cover'] = $cover;
+            } elseif ($cover === '') {
+                $item['cover'] = $domain . '/uploads/images/koreandefualt.png';
+            } else {
+                $item['cover'] = $domain . '/' . ltrim($cover, '/');
+            }
+            $item['rank'] = rand(1, 100);
+        });
+
+        return json([
+            'koreandata' => $data->toArray(),
+            'pagination' => [
+                'current_page' => $page,
+                'last_page'    => $lastPage,
+                'per_page'     => $pageSize,
+                'total'        => $total,
+            ],
+            'types' => 1,
+        ]);
+    }
+
+    public function concrete($id)
+    {
+        $ThaitaiwaneseModel = new \app\model\Thaitaiwanese();
+        $domain = $this->request->domain();
+        $shortinfo = $ThaitaiwaneseModel->where('id', $id)->find();
+
+        if ($shortinfo['name'] || $shortinfo['crew']) {
+            $shortinfo['key'] = $shortinfo['name'] . ',' . $shortinfo['crew'];
         }
-        $all_data = $foreignModel->orderRaw('viewCount desc')->orderRaw('RAND()')->select()->toArray();
+        if ($shortinfo['oneselfquarklink']) {
+            $shortinfo['quark'] = $shortinfo['oneselfquarklink'];
+        } else if ($shortinfo['quarklink'] != "未找到" && $shortinfo['quarklink'] != "失效链接") {
+            $shortinfo['quark'] = $shortinfo['quarklink'];
+        } else {
+            $shortinfo['quark'] = "";
+        }
+
+        if ($shortinfo['oneselfbaidulink']) {
+            $shortinfo['baidu'] = $shortinfo['oneselfbaidulink'];
+        } else if ($shortinfo['baidulink'] != "未找到" && $shortinfo['baidulink'] != "失效链接") {
+            $shortinfo['baidu'] = $shortinfo['baidulink'];
+        } else {
+            $shortinfo['baidu'] = "";
+        }
+
+        if ($shortinfo['finished']) {
+            $shortinfo['status'] = "已完结";
+        } else {
+            $shortinfo['status'] = "连载中";
+        }
+        $shortinfo['allEpis'] = $shortinfo['conerMemo'];
+        $cover = trim($shortinfo['cover'] ?? '');
+        if (preg_match('#^https?://#i', $cover) || preg_match('#^//#i', $cover) || (strpos($cover, '.') !== false && $cover[0] !== '/')) {
+            $shortinfo['cover'] = $cover;
+        } elseif (empty($cover)) {
+            $shortinfo['cover'] = $this->request->domain() . '/uploads/images/koreandefualt.png';
+        } else {
+            $shortinfo['cover'] = $this->request->domain() . '/' . ltrim($cover, '/');
+        }
+        if ($shortinfo['publishTime']) {
+            $shortinfo['publishTime'] = date('Y-m-d', strtotime($shortinfo['publishTime']));
+        }
+
+        $shortinfo['description'] = mb_substr($shortinfo['intro'], 0, 142) .
+            (mb_strlen($shortinfo['intro']) > 142 ? '...' : '');
+        $all_data = $ThaitaiwaneseModel->orderRaw('years desc')->orderRaw('RAND()')->select()->toArray();
 
         $total_count = count($all_data);
         $start_index = max(0, floor($total_count / 2) - 11);
         $end_index = min($total_count, $start_index + 16);
-
-        $related_data = array_slice($all_data, $start_index, $end_index - $start_index);
-
-        $recommend_data = $foreignModel->orderRaw('viewCount desc')->orderRaw('RAND()')->limit(8)->select()->toArray(); // 确保转换为数组
-
-        $comprehensive_data = $foreignModel->order('datePublished desc')->limit(10)->select()->toArray();
+        $related_data       = $this->processIntroFields($this->normalizeImageFields(array_slice($all_data, $start_index, $end_index - $start_index)));
+        $recommend_data     = $this->processIntroFields($this->normalizeImageFields($ThaitaiwaneseModel->orderRaw('years desc')->orderRaw('RAND()')->limit(8)->select()->toArray()));
+        $comprehensive_data = $this->processIntroFields($this->normalizeImageFields($ThaitaiwaneseModel->order('years desc')->limit(10)->select()->toArray()));
 
         $response = [
             'shortinfo' => $shortinfo, // 详情
@@ -495,7 +449,7 @@ class Index extends BaseController
             'recommend_data' => $recommend_data, // 为您推荐(随机8条数据)
             'comprehensive_data' => $comprehensive_data, //综合榜(10条)
         ];
-        return view('series', ['shortdetail' => $response]);
+        return view('concrete', ['shortdetail' => $response, 'types' => 0]);
     }
 
     public function koreans()
@@ -637,38 +591,6 @@ class Index extends BaseController
         return view('article', ['article' => $response, 'types' => 0]);
     }
 
-    private function processArticleName($name)
-    {
-        $title = '';
-        $episode = '';
-        $author1 = '';
-        $author2 = '';
-
-        if (preg_match('/^(.*?)（(\d+集)）(.*)$/', $name, $matches)) {
-            $title = trim($matches[1]);
-            $episode = trim($matches[2]);
-            $authors = trim($matches[3]);
-
-            $authorsParts = preg_split('/[&＆]/u', $authors, 2);;
-            if (count($authorsParts) > 0) {
-                $author1 = trim($authorsParts[0]);
-            }
-            if (count($authorsParts) > 1) {
-                $author2 = trim($authorsParts[1]);
-            }
-        } else {
-            $title = trim($name);
-        }
-
-        $safeTitle = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-
-        return [
-            'title' => $safeTitle,
-            'episodes' => $episode,
-            'author1' => $author1,
-            'author2' => $author2
-        ];
-    }
 
     private function normalizeImageFields(array $items): array
     {

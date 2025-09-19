@@ -25,7 +25,7 @@
             "@type": "WebPage",
             "name": "韩剧资源搜索 | koreanshort",
             "description": "每日更新全网热门韩剧资源大全，免费提供高清韩剧在线观看",
-            "url": "https://www.koreanshort.com",
+            "url": "https://www.koreanshort.com/search",
             "publisher": {
                 "@type": "Organization",
                 "name": "koreanshort",
@@ -297,7 +297,12 @@
             var parts = path.split('/search/')[1]?.split('/') || [];
             var searchValue = parts[0] ? decodeURIComponent(parts[0]) : '';
             var category = parts[1] || '';
-            // console.log("searchValue",searchValue);console.log("category",category);return;
+            if (category == "home" || category == "korean" || category == "particulars") {
+                var category = "korean";
+            } else if (category == "thai" || category == "taiwanese" || category == "concrete") {
+                var category = "thai";
+            }
+            // console.log("searchValue", searchValue); console.log("category", category); return;
             if (searchValue) {
                 $("#searchInput").val(decodeURIComponent(searchValue));
             }

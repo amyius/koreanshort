@@ -40,7 +40,9 @@
     <link rel="icon" href="favicons.ico" type="image/x-icon">
     <title>{$shortdetail.shortinfo.name}-共{$shortdetail.shortinfo.allEpis}集 | 大陆韩剧 | koreanshort</title>
     <link rel="icon" href="/favicons.ico" type="image/x-icon">
-    <link rel="canonical" href="https://www.koreanshort.com/particulars/{$shortdetail.shortinfo.id}/{$shortdetail.shortinfo.name|rawurlencode}">
+    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    <link rel="canonical"
+        href="https://www.koreanshort.com/particulars/{$shortdetail.shortinfo.id}/{$shortdetail.shortinfo.name|rawurlencode}">
     <link rel="shortcut icon" href="favicons.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -655,6 +657,7 @@
                 {$shortdetail.shortinfo.name} 剧集观看2
             </button>
             {/if}
+            <button style="margin-left: 20px;" class="favorite">点击进入群聊获取更多信息</button>
         </div>
         {if $shortdetail.shortinfo.starList}
         <div class="actor-list">
@@ -740,7 +743,7 @@
     {include file="common/footer" /}
     <button class="back-to-top" title="TOP">↑</button>
     {include file="common/qrcode" /}
-    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    
     <script>
         $(document).ready(function () {
             $(window).scroll(function () {
@@ -755,6 +758,13 @@
             $('.back-to-top').click(function () {
                 $('html, body').animate({ scrollTop: 0 }, 'smooth');
                 return false;
+            });
+            $('.favorite').click(function () {
+                gtag('event', 'groupchat_click', {
+                    'event_category': 'engagement',
+                    'event_label': 'groupchat button clicked'
+                });
+                window.open('https://pan.quark.cn/g/8b73ea5c98', '_blank', 'noopener,noreferrer');
             });
             // $('.start').click(function (e) {
             //     e.preventDefault(); // 阻止默认跳转行为

@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=5,width=device-width,viewport-fit=cover">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Content-Language" content="zh-CN">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description"
+        content="【台剧粉集合！】每日刷屏更新！现象级神剧《不够善良的我们》《华灯初上》《想见你》全集免费秒点！甜虐爱情、惊悚悬疑、社会写实、BL嗑糖全都有⋯1080P高清画质、零广告、免登录、在线即看！追台剧，这一站就够用！">
+    <meta name="keywords"
+        content="台剧,台剧免费观看,台剧在线看,华灯初上全集,不够善良的我们,想见你台剧,台剧BL,台剧悬疑,最新台剧,高分台剧,台湾电视剧,台剧推荐2025,免费台剧资源,追剧台剧,高清台剧">
+    <meta itemprop="name" content="台剧更新榜 - 台湾电视剧电影免费看">
+    <meta property="og:type" content="webpage">
+    <meta property="og:title" content="台剧 | taiwandrama">
+    <meta property="og:description" content="现象级台剧每日更新！《不够善良的我们》《华灯初上》《想见你》全套免费在线看，1080P零广告，嗑糖虐恋悬疑BL一次打包！台剧迷的追剧天堂！">
+    <meta property="og:image" content="https://www.koreanshort.com/favicons.ico">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HWMC2V2MQY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-HWMC2V2MQY');
+    </script>
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "台剧榜 - 台湾电视剧电影免费看 | koreanshort",
+            "description": "【台剧粉集合！】每日刷屏更新！现象级神剧《不够善良的我们》《华灯初上》《想见你》全集免费秒点！甜虐爱情、惊悚悬疑、社会写实、BL嗑糖全都有⋯1080P高清画质、零广告、免登录、在线即看！追台剧，这一站就够用！",
+            "url": "https://www.koreanshort.com/taiwanese",
+            "publisher": {
+                "@type": "Organization",
+                "name": "koreanshort",
+                "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://www.koreanshort.com/favicons.ico"
+                }
+            }
+        }
+    </script>
+    <title>台剧榜 - 台湾电视剧电影免费看 | koreanshort</title>
+    <link rel="icon" href="/favicons.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicons.ico">
+    <link rel="canonical" href="https://www.koreanshort.com/taiwanese">
+    <script rel="preload" src="/js/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #F5B98A;
+            --secondary-color: #3498DB;
+            --dark-color: #1f1f1f;
+            --light-color: #f8f9fa;
+            --gray-color: #6c757d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #ffffff;
+            --light-text: #666666;
+            --border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .update-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 15px;
+            position: relative;
+        }
+
+        .update-date {
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+
+        .update-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        .year-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .year-tab {
+            padding: 10px 20px;
+            background: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .year-tab::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .year-tab.active {
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .year-tab.active::before {
+            transform: scaleX(1);
+        }
+
+        /* 为年份标签设置不同颜色 */
+        .year-tab:nth-child(1) {
+            background: #E74C3C;
+            color: white;
+        }
+
+        .year-tab:nth-child(2) {
+            background: #E67E22;
+            color: white;
+        }
+
+        .year-tab:nth-child(3) {
+            background: #F39C12;
+            color: #333;
+        }
+
+        .year-tab:nth-child(4) {
+            background: #2ECC71;
+            color: white;
+        }
+
+        .year-tab:nth-child(5) {
+            background: #3498DB;
+            color: white;
+        }
+
+        .year-tab:nth-child(6) {
+            background: #9B59B6;
+            color: white;
+        }
+
+        .year-tab:nth-child(7) {
+            background: #34495E;
+            color: white;
+        }
+
+        .year-tab:nth-child(8) {
+            background: #7F8C8D;
+            color: white;
+        }
+
+        .year-tab:nth-child(1)::before {
+            background: #E74C3C;
+        }
+
+        .year-tab:nth-child(2)::before {
+            background: #E67E22;
+        }
+
+        .year-tab:nth-child(3)::before {
+            background: #F39C12;
+        }
+
+        .year-tab:nth-child(4)::before {
+            background: #2ECC71;
+        }
+
+        .year-tab:nth-child(5)::before {
+            background: #3498DB;
+        }
+
+        .year-tab:nth-child(6)::before {
+            background: #9B59B6;
+        }
+
+        .year-tab:nth-child(7)::before {
+            background: #34495E;
+        }
+
+        .year-tab:nth-child(8)::before {
+            background: #7F8C8D;
+        }
+
+        .year-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .year-content.active {
+            display: block;
+        }
+
+        .drama-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .drama-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .drama-card:hover {
+            cursor: pointer;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .drama-poster {
+            width: 100%;
+            height: 0;
+            padding-bottom: 140%;
+            background-color: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drama-poster img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .drama-card:hover .drama-poster img {
+            transform: scale(1.05);
+        }
+
+        .drama-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 2;
+        }
+
+        .drama-duration {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 2;
+        }
+
+        .drama-info {
+            padding: 15px;
+        }
+
+        .drama-title {
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 16px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 50px;
+        }
+
+        .drama-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--light-text);
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .drama-views {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .drama-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .drama-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            color: var(--light-text);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        /* 分页容器 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 24px 0;
+            font-size: 14px;
+        }
+
+        /* 公共按钮 */
+        .pagination .page-btn,
+        .pagination .page-dots {
+            margin: 0 4px;
+            padding: 6px 10px;
+            min-width: 32px;
+            height: 32px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid #d0d7de;
+            border-radius: 4px;
+            background: #fff;
+            color: #24292f;
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        /* 当前页高亮 */
+        .pagination .page-btn.active {
+            background: #f07939;
+            border-color: #f07939;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* 禁用状态 */
+        .pagination .page-btn:disabled {
+            background: #f6f8fa;
+            border-color: #d0d7de;
+            color: #8c959f;
+            cursor: not-allowed;
+        }
+
+        /* 省略号 */
+        .pagination .page-dots {
+            border: none;
+            background: none;
+            cursor: default;
+        }
+
+        /* 悬浮效果 */
+        .pagination .page-btn:not(.active):not(:disabled):hover {
+            border-color: #f07939;
+            color: #f07939;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            grid-column: 1 / -1;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .back-to-top:active {
+            transform: scale(0.95);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: var(--gray-color);
+            grid-column: 1 / -1;
+        }
+
+        #currentYear {
+            margin-left: 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .drama-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .year-tab {
+                padding: 8px 16px;
+                font-size: 15px;
+            }
+
+            .drama-title {
+                font-size: 15px;
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .drama-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .update-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .year-tabs {
+                justify-content: flex-start;
+                padding-bottom: 10px;
+            }
+
+            .home-button {
+                top: 15px;
+                left: 15px;
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .drama-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+                gap: 12px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .drama-title {
+                font-size: 14px;
+                height: 38px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .drama-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .year-tab {
+                padding: 6px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        {include file="common/header" /}
+
+        <div class="year-tabs" id="yearTabs"></div>
+        <div id="yearContents"></div>
+        {include file="common/footer" /}
+    </div>
+
+    <button class="back-to-top" title="返回顶部">↑</button>
+    {include file="common/qrcode" /}
+    <script>
+        // 配置
+        const CONFIG = {
+            itemsPerPage: 20,
+            defaultYear: '2025'
+        };
+
+        // 获取年份列表
+        function getYearList() {
+            return ['2025', '2024', '2023', '2022', '2021', '2020', '2015-2019', '1-2014'];
+        }
+
+        // 获取当前年份
+        function getCurrentYear() {
+            return new Date().getFullYear().toString();
+        }
+
+        // 从服务器获取韩剧数据
+        async function fetchDramaData(year = "2025", page = 1) {
+            try {
+                const response = await $.ajax({
+                    url: '/taiwanese',
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                        page: page,
+                        years: year
+                    }
+                });
+
+                const dramas = Array.isArray(response.koreandata) ? response.koreandata.map(item => ({
+                    id: item.id,
+                    title: item.name || '',
+                    duration: item.conerMemo ? `${item.conerMemo}` : '',
+                    tags: item.catetype || [],
+                    views: item.rank,
+                    istype: item.type || 'score',
+                    name: item.name,
+                    thumb: item.cover,
+                    crew: item.crew
+                })) : [];
+
+                return {
+                    dramas: dramas,
+                    pagination: response.pagination || { current_page: 1, last_page: 1 }
+                };
+            } catch (error) {
+                console.error('获取数据失败:', error);
+                return {
+                    dramas: [],
+                    pagination: { current_page: 1, last_page: 1 }
+                };
+            }
+        }
+
+        // 获取默认图片
+        function getDefaultImage() {
+            const random = Math.floor(Math.random() * 1000);
+            return `https://picsum.photos/300/420?random=${random}`;
+        }
+
+        // 显示加载状态
+        function showLoading(year) {
+            const contentId = `content-${year}`;
+            let contentElement = document.getElementById(contentId);
+
+            if (!contentElement) {
+                contentElement = document.createElement('div');
+                contentElement.id = contentId;
+                contentElement.className = 'year-content';
+                document.getElementById('yearContents').appendChild(contentElement);
+            }
+
+            contentElement.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                </div>
+            `;
+        }
+
+        // 渲染年份标签
+        function renderYearTabs() {
+            const container = $('#yearTabs');
+            container.empty();
+
+            const years = getYearList();
+            const currentYear = getCurrentYear();
+
+            years.forEach((year, index) => {
+                const tab = $('<button>')
+                    .addClass('year-tab' + (year === CONFIG.defaultYear ? ' active' : ''))
+                    .text(year)
+                    .attr('data-year', year)
+                    .on('click', function () {
+                        switchYear(year);
+                    });
+                container.append(tab);
+            });
+        }
+
+        async function switchYear(year) {
+            if ($('.year-tab.active').data('year') === year) return;
+
+            $('.year-tab').removeClass('active');
+            $(`.year-tab[data-year="${year}"]`).addClass('active');
+            $('#currentYear').text(year);
+
+            const contentId = `content-${year}`;
+            let contentElement = document.getElementById(contentId);
+
+            if (!contentElement) {
+                contentElement = document.createElement('div');
+                contentElement.id = contentId;
+                contentElement.className = 'year-content';
+                document.getElementById('yearContents').appendChild(contentElement);
+            }
+
+            // 显示加载状态
+            contentElement.innerHTML = '<div class="loading"><div class="loading-spinner"></div></div>';
+
+            // 隐藏其他内容
+            $('.year-content').removeClass('active');
+            $(contentElement).addClass('active');
+
+            try {
+                const data = await fetchDramaData(year, 1);
+                renderYearContent(year, data);
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                contentElement.innerHTML = '<div class="error">加载数据失败，请稍后重试</div>';
+            }
+        }
+
+        // 渲染单个年份的内容
+        function renderYearContent(year, { dramas, pagination }) {
+            const container = $(`#content-${year}`);
+            container.empty();
+            // 先移除加载状态
+            container.find('.loading').remove();
+
+            if (!dramas || dramas.length === 0) {
+                container.html('<div class="no-results">暂无该年份的台剧数据</div>');
+                return;
+            }
+
+            container.html(`
+                <div class="drama-grid" id="grid-${year}"></div>
+                <div class="pagination" id="pagination-${year}"></div>
+            `);
+
+            // 渲染当前页数据
+            const grid = $(`#grid-${year}`);
+            const fragment = document.createDocumentFragment();
+            dramas.forEach(drama => {
+                fragment.appendChild(createDramaCard(drama));
+            });
+            grid.append(fragment);
+
+            // 渲染分页
+            renderPagination(year, pagination);
+        }
+
+        function renderPagination(year, pagination) {
+            const { current_page: currentPage, last_page: totalPages } = pagination;
+            const paginationContainer = $(`#pagination-${year}`);
+            paginationContainer.empty();
+
+            if (totalPages <= 1) return;
+
+            const paginationHTML = $(`<div class="pagination"></div>`);
+
+            // 上一页
+            const prevDisabled = currentPage <= 1 ? 'disabled' : '';
+            paginationHTML.append(`
+                <button class="page-btn prev ${prevDisabled}" data-page="${currentPage - 1}">
+                    <i class="fas fa-chevron-left"></i> 上一页
+                </button>
+            `);
+
+            if (currentPage > 3) {
+                paginationHTML.append(`<button class="page-btn" data-page="1">1</button>`);
+                if (currentPage > 4) paginationHTML.append('<span class="page-dots">...</span>');
+            }
+
+            const start = Math.max(1, currentPage - 2);
+            const end = Math.min(totalPages, currentPage + 2);
+            for (let i = start; i <= end; i++) {
+                const active = i === currentPage ? 'active' : '';
+                paginationHTML.append(`<button class="page-btn ${active}" data-page="${i}">${i}</button>`);
+            }
+
+            if (currentPage < totalPages - 2) {
+                if (currentPage < totalPages - 3) paginationHTML.append('<span class="page-dots">...</span>');
+                paginationHTML.append(`<button class="page-btn" data-page="${totalPages}">${totalPages}</button>`);
+            }
+
+            // 下一页
+            const nextDisabled = currentPage >= totalPages ? 'disabled' : '';
+            paginationHTML.append(`
+        <button class="page-btn next ${nextDisabled}" data-page="${currentPage + 1}">
+            下一页 <i class="fas fa-chevron-right"></i>
+        </button>
+    `);
+
+            paginationContainer.html(paginationHTML);
+
+            // 点击事件
+            paginationContainer.off('click').on('click', '.page-btn:not(.disabled)', async function () {
+                const page = parseInt($(this).data('page'));
+                if (!isNaN(page) && page !== currentPage) {
+                    $(`#content-${year}`).html('<div class="loading"><div class="loading-spinner"></div></div>');
+                    const data = await fetchDramaData(year, page);
+                    renderYearContent(year, data);
+                }
+            });
+        }
+
+        // 创建韩剧卡片
+        function createDramaCard(drama) {
+            const dramaCard = document.createElement('div');
+            dramaCard.className = 'drama-card';
+
+            // 徽章
+            let badges = '';
+            if (drama.istype == "new") {
+                badges += `<div class="drama-badge" style="background: #E74C3C">最新</div>`;
+            }
+            if (drama.istype == "hot") {
+                badges += `<div class="drama-badge" style="left: 50px; background: #E67E22;">最热</div>`;
+            }
+
+            // 标签
+            let tagsHTML = '';
+            if (drama.tags && Array.isArray(drama.tags)) {
+                tagsHTML = drama.tags.map(tag =>
+                    `<span class="drama-tag">${tag}</span>`
+                ).join('');
+            }
+
+            dramaCard.innerHTML = `
+                <div class="drama-poster">
+                    ${badges}
+                    <img src="${drama.thumb}" 
+                        alt="${drama.title}" 
+                        referrerpolicy="no-referrer"
+                        loading="lazy"
+                        onerror="this.src='${getDefaultImage()}'">
+                    <div class="drama-duration">${drama.duration}</div>
+                </div>
+                <div class="drama-info">
+                    <div class="drama-title">${drama.title}</div>
+                    <div>${drama.crew || ''}</div>
+                    <div class="drama-stats">
+                        <div class="drama-views">
+                            评分：${formatViewCount(drama.views)}
+                        </div>
+                    </div>
+                    <div class="drama-tags">
+                        ${tagsHTML}
+                    </div>
+                </div>
+            `;
+
+            dramaCard.addEventListener('click', () => {
+                const url = `/concrete/${drama.id}/${encodeURIComponent(encodeURIComponent(drama.name))}`;
+                window.open(url, '_blank');
+            });
+
+            return dramaCard; // ✅ 确保返回的是 DOM 元素
+        }
+        // 格式化观看次数
+        function formatViewCount(views) {
+            const count = parseInt(views) || 0;
+            if (count >= 10000) {
+                return (count / 10000).toFixed(1) + '万';
+            }
+            return count.toString();
+        }
+
+        // 更新分页按钮状态
+        function updatePaginationButtons(year, currentPage, totalPages) {
+            const container = $(`#content-${year}`);
+
+            // 更新上一页按钮
+            const prevBtn = container.find('.prev-btn');
+            prevBtn.prop('disabled', currentPage === 1);
+            prevBtn.data('page', currentPage > 1 ? currentPage - 1 : 1);
+
+            // 更新下一页按钮
+            const nextBtn = container.find('.next-btn');
+            nextBtn.prop('disabled', currentPage === totalPages);
+            nextBtn.data('page', currentPage < totalPages ? currentPage + 1 : totalPages);
+
+            // 更新页码按钮状态
+            container.find('.page-btn').each(function () {
+                const page = $(this).data('page');
+                if (page && !isNaN(page)) {
+                    $(this).toggleClass('active', parseInt(page) === currentPage);
+                }
+            });
+        }
+
+        // 初始加载
+        $(document).ready(function () {
+            // 返回顶部按钮
+            $(window).scroll(function () {
+                $('.back-to-top').toggle($(this).scrollTop() > 300);
+            });
+
+            $('.back-to-top').click(function () {
+                $('html, body').animate({ scrollTop: 0 }, 'smooth');
+                return false;
+            });
+
+            renderYearTabs();
+            $('#currentYear').text(CONFIG.defaultYear);
+            switchYear(CONFIG.defaultYear);
+
+            // 图片懒加载处理
+            if ('IntersectionObserver' in window) {
+                const lazyImageObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            const lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+
+                document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+                    img.dataset.src = img.src;
+                    img.src = '';
+                    lazyImageObserver.observe(img);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

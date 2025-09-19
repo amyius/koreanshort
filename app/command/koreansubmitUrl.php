@@ -24,7 +24,7 @@ class koreansubmitUrl extends Command
     {
         $shortplay = Db::name('koreanshort')
             ->orderRaw('RAND()')
-            ->limit(97)
+            ->limit(70)
             ->select()
             ->toArray();
 
@@ -32,6 +32,36 @@ class koreansubmitUrl extends Command
         foreach ($shortplay as $key => $value) {
             $urlList[] = 'https://www.koreanshort.com/particulars/' . $value['id'] . '/' . $value['name'];
         }
+        $thaitaiwanesedramas = Db::name('thai_taiwanese_dramas')
+            ->where('area', 'LIKE', '%泰国%')
+            ->orderRaw('RAND()')
+            ->limit(13)
+            ->select()
+            ->toArray();
+        foreach ($thaitaiwanesedramas as $key => $value) {
+            $urlList[] = 'https://www.koreanshort.com/concrete/' . $value['id'] . '/' . $value['name'];
+        }
+
+        $thaitaiwanesedramas = Db::name('thai_taiwanese_dramas')
+            ->where('area', 'LIKE', '%台湾%')
+            ->orderRaw('RAND()')
+            ->limit(14)
+            ->select()
+            ->toArray();
+        foreach ($thaitaiwanesedramas as $key => $value) {
+            $urlList[] = 'https://www.koreanshort.com/concrete/' . $value['id'] . '/' . $value['name'];
+        }
+
+        $thaitaiwanes = Db::name('thai_taiwanese_dramas')
+            ->where('area', 'LIKE', '%泰国%')
+            ->orderRaw('RAND()')
+            ->limit(13)
+            ->select()
+            ->toArray();
+        foreach ($thaitaiwanes as $key => $value) {
+            $urlList[] = 'https://www.koreanshort.com/concrete/' . $value['id'] . '/' . $value['name'];
+        }
+
         $urlList[] = 'https://www.koreanshort.com';
         $urlList[] = 'https://www.koreanshort.com/info';
         $urlList[] = 'https://www.koreanshort.com/koreans';

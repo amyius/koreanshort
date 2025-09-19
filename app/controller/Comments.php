@@ -10,10 +10,11 @@ class Comments extends BaseController
     public function index()
     {
         $shortdataId = (int)$this->request->param('shortdataId', 0);
-        $foreignId   = (int)$this->request->param('foreignId', 0); 
+        $foreignId   = (int)$this->request->param('foreignId', 0);
         $koreanId    = trim($this->request->param('koreanId', ''));
+        $thaiId    =(int)$this->request->param('thaiId', 0);
 
-        $validCount = ($shortdataId > 0) + ($foreignId > 0) + ($koreanId !== '');
+        $validCount = ($shortdataId > 0) + ($foreignId > 0) + ($koreanId !== '') + ($thaiId > 0);
         if ($validCount !== 1) {
             return json(['code' => 0, 'msg' => '必须且只能提供 shortdataId、foreignId、koreanId 中的一个']);
         }
@@ -26,6 +27,8 @@ class Comments extends BaseController
             $comments = $query->where('shortdata_id', $shortdataId)->select();
         } elseif ($foreignId) {
             $comments = $query->where('foreign_id', $foreignId)->select();
+        } elseif ($thaiId) {
+            $comments = $query->where('thai_id', $thaiId)->select();
         } else {
             $comments = $query->where('korean_id', $koreanId)->select();
         }
