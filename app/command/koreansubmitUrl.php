@@ -32,15 +32,6 @@ class koreansubmitUrl extends Command
         foreach ($shortplay as $key => $value) {
             $urlList[] = 'https://www.koreanshort.com/particulars/' . $value['id'] . '/' . $value['name'];
         }
-        $thaitaiwanesedramas = Db::name('thai_taiwanese_dramas')
-            ->where('area', 'LIKE', '%泰国%')
-            ->orderRaw('RAND()')
-            ->limit(13)
-            ->select()
-            ->toArray();
-        foreach ($thaitaiwanesedramas as $key => $value) {
-            $urlList[] = 'https://www.koreanshort.com/concrete/' . $value['id'] . '/' . $value['name'];
-        }
 
         $thaitaiwanesedramas = Db::name('thai_taiwanese_dramas')
             ->where('area', 'LIKE', '%台湾%')
